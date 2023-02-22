@@ -6,6 +6,7 @@ Issue # _____
 
 # List any known issues (include relevant code snippets): 
   - (ex.) Need to implement sad path
+  - If none, please state none
   - 
 
 
