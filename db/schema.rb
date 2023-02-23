@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_23_185122) do
+ActiveRecord::Schema.define(version: 2023_02_23_232745) do
 
   create_table "lists", force: :cascade do |t|
     t.string "name"
@@ -21,11 +21,12 @@ ActiveRecord::Schema.define(version: 2023_02_23_185122) do
   end
 
   create_table "media_lists", force: :cascade do |t|
-    t.integer "media_id"
     t.integer "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_media_id"
     t.index ["list_id"], name: "index_media_lists_on_list_id"
+    t.index ["user_media_id"], name: "index_media_lists_on_user_media_id"
   end
 
   create_table "user_media", force: :cascade do |t|
