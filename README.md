@@ -1,7 +1,7 @@
 # StreamLined
 
 ## Project Overview
-The goal of this project is to create a successful web application from a student-led project idea. Our team has created an app to solve a real world problem, allows users to authenticate with a third-party service, and consume at least two other apis.
+The goal of this project is to create a successful web application from a student-led project idea. Our team has created an app to solve a real world problem, allows users to authenticate with a third-party service, and consume at least two other apis. This project was created using Service Oriented Architecture. The frontend repo can be found [here](https://github.com/Streamlined-Turing/streamlined_fe).
 
 ## About StreamLined
 StreamLined is a tool to track movies and TV shows a user would like to watch, are currently watching, and also track media a user has watched. Once a user has created a StreamLined account, they will have access to a dashboard with three default lists to categorize their media: 'Currently Watching', 'Want to Watch', and 'Watched'. The user will be able to search for movies and TV shows by title, view the media details, and save to the appropriate list in their dashboard. Once a user has finished watching their show or movie, the user will be able to provide reviews and ratings. Users of this app will be to set their streaming services and search for their desired media based on the streaming service available to the user.
@@ -15,11 +15,12 @@ StreamLined is a tool to track movies and TV shows a user would like to watch, a
 This project requires Ruby 2.7.4 
 
 1. Fork and clone this repository.
-2. CD into the root directory.
+2. `cd` into the root directory.
 3. Run `bundle install`
-4. Run `rails db:{drop,create,migrate}`
-5. To run this server, enter `rails s`
-6. Open a browser window and go to http://localhost:3000
+4. Run `rails db:{drop,create,migrate,seed}`
+5. To run the test suite, run `bundle exec rspec`
+6. To run this server, enter `rails s`
+7. Open a browser window and go to http://localhost:3000
 
 You should now be able to hit the API endpoints using Postman or a similar tool.
 
@@ -29,7 +30,7 @@ Ruby on Rails
 RSpec
 ```
 ## Database Schema
-
+![Screen Shot 2023-02-23 at 12 23 58 PM](https://user-images.githubusercontent.com/111480866/221022387-3f0a600d-83ed-43c0-ac53-2bee3e39085f.png)
 
 ## API Endpoints
 ### Movie Details
