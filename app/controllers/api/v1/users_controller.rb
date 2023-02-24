@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApplicationController
     # we'll need to do this instead of find_or_create
     # to account for possibility that user changed any email profile settings
 
-    if user = User.find_by(uid: params[:uid])
+    if (user = User.find_by(uid: params[:uid]))
       user
       render json: UserSerializer.new(user), status: :ok
     else
