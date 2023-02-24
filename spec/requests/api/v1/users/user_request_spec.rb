@@ -41,18 +41,26 @@ RSpec.describe 'Users API' do
         "uid"=> user.uid,
         "username"=>user.username,
         "email"=>user.email,
-        "first_name"=>user.full_name,
+        "full_name"=>user.full_name,
         "image"=>user.image
       }
 
       headers = {"CONTENT_TYPE" => "application/json"}
-      post "/api/v1/users", headers: headers, params: JSON.generate(user: user_params)
+      post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
       
       existing_user = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
+      expect(existing_user[:data]).to be_a(Hash)
+      expect(existing_user[:data]).to have_key(:type)
+      expect(existing_user[:data]).to have_key(:attributes)
       expect(existing_user[:data][:id].to_i).to eq(user.id)
-
+      expect(existing_user[:data][:attributes].keys.sort).to eq([:uid, :username, :email, :full_name, :image].sort)
+      expect(existing_user[:data][:attributes][:uid]).to eq(user.uid)
+      expect(existing_user[:data][:attributes][:username]).to eq(user.username)
+      expect(existing_user[:data][:attributes][:email]).to eq(user.email)
+      expect(existing_user[:data][:attributes][:full_name]).to eq(user.full_name)
+      expect(existing_user[:data][:attributes][:image]).to eq(user.image)
     end
 
     xit 'returns an error is the user is not created and do not exist' do 
