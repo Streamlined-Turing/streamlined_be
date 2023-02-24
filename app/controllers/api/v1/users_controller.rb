@@ -1,7 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   def create
     if (user = User.find_by(sub: params[:sub]))
-      user
       render json: UserSerializer.new(user), status: :ok
     else
       user = User.create(user_params)
