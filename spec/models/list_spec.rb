@@ -6,5 +6,4 @@ RSpec.describe List do
     it { should have_many :media_lists }
     it { should have_many(:user_medias).through(:media_lists) }
   end
-  
 end
