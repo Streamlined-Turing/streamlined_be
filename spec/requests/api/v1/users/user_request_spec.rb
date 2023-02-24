@@ -125,4 +125,17 @@ RSpec.describe 'Users API' do
       expect(user_result[:data][:attributes][:image]).to eq("https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c")
     end
   end
+
+  describe 'deleting a user' do
+    it 'destroys the user' do
+      user = create(:user)
+
+      delete "/api/v1/users/#{user.id}"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+      expect(User.count).to eq(0)
+      expect(User.last).to eq(nil)
+    end
+  end
 end

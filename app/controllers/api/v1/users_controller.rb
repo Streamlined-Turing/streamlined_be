@@ -19,6 +19,11 @@ class Api::V1::UsersController < ApplicationController
     render json: UserSerializer.new(User.find(params[:id])), status: 200
   end
 
+  def destroy
+    User.destroy(params[:id])
+    render status: :no_content
+  end
+
   private
 
   def user_params
