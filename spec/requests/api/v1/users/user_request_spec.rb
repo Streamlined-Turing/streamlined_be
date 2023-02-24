@@ -63,10 +63,6 @@ RSpec.describe 'Users API' do
       expect(existing_user[:data][:attributes][:full_name]).to eq(user.full_name)
       expect(existing_user[:data][:attributes][:image]).to eq(user.image)
     end
-
-    xit 'returns an error is the user is not created and do not exist' do
-      # not sure if this is possible with oauth?
-    end
   end
 
   describe 'edit a user resource' do
