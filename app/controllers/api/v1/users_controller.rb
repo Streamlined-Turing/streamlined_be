@@ -1,8 +1,5 @@
 class Api::V1::UsersController < ApplicationController
   def create
-    # we'll need to do this instead of find_or_create
-    # to account for possibility that user changed any email profile settings
-
     if (user = User.find_by(uid: params[:uid]))
       user
       render json: UserSerializer.new(user), status: :ok
@@ -25,8 +22,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    # changed this to align with what FE is sending, will require further changes based on
-    # what oauth sends us
     params.permit(:username,
                   :uid,
                   :full_name,
