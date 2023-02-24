@@ -9,8 +9,8 @@ RSpec.describe User do
 
   describe 'validations' do
     it { should validate_presence_of :email }
-    it { should validate_presence_of :uid }
-    it { should validate_presence_of :image }
-    it { should validate_presence_of :full_name }
+    it { should validate_presence_of :sub }
+    it { should validate_presence_of :picture }
+    it { should validate_presence_of :name }
   end
 end

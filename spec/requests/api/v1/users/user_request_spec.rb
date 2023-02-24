@@ -4,13 +4,13 @@ RSpec.describe 'Users API' do
   describe 'create a user resource' do
     it 'can create a new user in the database' do
       user_params = {
-        "uid"=>"104505147435508023263",
-        "full_name"=>"Alex Pitzel",
+        "sub"=>"104505147435508023263",
+        "name"=>"Alex Pitzel",
         "username"=>"pitzelalex",
         "email"=>"pitzelalex@gmail.com",
         "first_name"=>"Alex",
         "last_name"=>"Pitzel",
-        "image"=>"https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
+        "picture"=>"https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
       }
       headers = {"CONTENT_TYPE" => "application/json"}
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
@@ -25,11 +25,11 @@ RSpec.describe 'Users API' do
       expect(new_user[:data]).to have_key(:id)
       expect(new_user[:data]).to have_key(:type)
       expect(new_user[:data]).to have_key(:attributes)
-      expect(new_user[:data][:attributes]).to have_key(:uid)
+      expect(new_user[:data][:attributes]).to have_key(:sub)
       expect(new_user[:data][:attributes]).to have_key(:username)
       expect(new_user[:data][:attributes]).to have_key(:email)
-      expect(new_user[:data][:attributes]).to have_key(:full_name)
-      expect(new_user[:data][:attributes]).to have_key(:image)
+      expect(new_user[:data][:attributes]).to have_key(:name)
+      expect(new_user[:data][:attributes]).to have_key(:picture)
       expect(new_user[:data][:attributes]).to_not have_key(:first_name)
       expect(new_user[:data][:attributes]).to_not have_key(:last_name)
     end
@@ -38,11 +38,11 @@ RSpec.describe 'Users API' do
       user = create(:user)
 
       user_params = {
-        "uid"=> user.uid,
+        "sub"=> user.sub,
         "username"=>user.username,
         "email"=>user.email,
-        "full_name"=>user.full_name,
-        "image"=>user.image
+        "name"=>user.name,
+        "picture"=>user.picture
       }
 
       headers = {"CONTENT_TYPE" => "application/json"}
@@ -56,21 +56,21 @@ RSpec.describe 'Users API' do
       expect(existing_user[:data]).to have_key(:type)
       expect(existing_user[:data]).to have_key(:attributes)
       expect(existing_user[:data][:id].to_i).to eq(user.id)
-      expect(existing_user[:data][:attributes].keys.sort).to eq([:uid, :username, :email, :full_name, :image].sort)
-      expect(existing_user[:data][:attributes][:uid]).to eq(user.uid)
+      expect(existing_user[:data][:attributes].keys.sort).to eq([:sub, :username, :email, :name, :picture].sort)
+      expect(existing_user[:data][:attributes][:sub]).to eq(user.sub)
       expect(existing_user[:data][:attributes][:username]).to eq(user.username)
       expect(existing_user[:data][:attributes][:email]).to eq(user.email)
-      expect(existing_user[:data][:attributes][:full_name]).to eq(user.full_name)
-      expect(existing_user[:data][:attributes][:image]).to eq(user.image)
+      expect(existing_user[:data][:attributes][:name]).to eq(user.name)
+      expect(existing_user[:data][:attributes][:picture]).to eq(user.picture)
     end
   end
 
   describe 'edit a user resource' do
     it 'can update user attributes' do
-      user = User.create!(uid: "104505147435508023263",
+      user = User.create!(sub: "104505147435508023263",
         email: "johnny@example.com",
-        full_name: "Johnny Appleseed",
-        image: "https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
+        name: "Johnny Appleseed",
+        picture: "https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
        )
 
        expect(user.username).to be nil
@@ -91,10 +91,10 @@ RSpec.describe 'Users API' do
   describe 'show a user resource' do
     it 'can show a user by users id' do
       user = User.create!(username: "Johnny",
-                          uid: "104505147435508023263",
+                          sub: "104505147435508023263",
                           email: "johnny@example.com",
-                          full_name: "Johnny Appleseed",
-                          image: "https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
+                          name: "Johnny Appleseed",
+                          picture: "https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
                          )
 
       get "/api/v1/users/#{user.id}"
@@ -112,17 +112,17 @@ RSpec.describe 'Users API' do
       expect(user_result[:data][:type]).to eq("user")
       expect(user_result[:data]).to have_key(:attributes)
       expect(user_result[:data][:attributes]).to be_a(Hash)
-      expect(user_result[:data][:attributes]).to have_key(:uid)
-      expect(user_result[:data][:attributes][:uid]).to eq("104505147435508023263")
+      expect(user_result[:data][:attributes]).to have_key(:sub)
+      expect(user_result[:data][:attributes][:sub]).to eq("104505147435508023263")
       expect(user_result[:data][:attributes]).to have_key(:username)
       expect(user_result[:data][:attributes][:username]).to eq("Johnny")
       expect(user_result[:data][:attributes]).to have_key(:email)
       expect(user_result[:data][:attributes][:email]).to eq("johnny@example.com")
-      expect(user_result[:data][:attributes]).to have_key(:full_name)
-      expect(user_result[:data][:attributes][:full_name]).to eq("Johnny Appleseed")
+      expect(user_result[:data][:attributes]).to have_key(:name)
+      expect(user_result[:data][:attributes][:name]).to eq("Johnny Appleseed")
       expect(user_result[:data][:attributes]).to_not have_key(:last_name)
-      expect(user_result[:data][:attributes]).to have_key(:image)
-      expect(user_result[:data][:attributes][:image]).to eq("https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c")
+      expect(user_result[:data][:attributes]).to have_key(:picture)
+      expect(user_result[:data][:attributes][:picture]).to eq("https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c")
     end
   end
 

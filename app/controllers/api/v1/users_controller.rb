@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   def create
-    if (user = User.find_by(uid: params[:uid]))
+    if (user = User.find_by(sub: params[:sub]))
       user
       render json: UserSerializer.new(user), status: :ok
     else
@@ -28,9 +28,9 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.permit(:username,
-                  :uid,
-                  :full_name,
+                  :sub,
+                  :name,
                   :email,
-                  :image)
+                  :picture)
   end
 end

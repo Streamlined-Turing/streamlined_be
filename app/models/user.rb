@@ -3,5 +3,5 @@ class User < ApplicationRecord
   has_many :media_lists, through: :lists
   has_many :user_medias, through: :media_lists
 
-  validates_presence_of :email, :uid, :image, :full_name
+  validates_presence_of :email, :sub, :picture, :name
 end

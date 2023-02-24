@@ -2,10 +2,10 @@ class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       t.string :email
-      t.string :full_name
-      t.string :uid
+      t.string :name
+      t.string :sub
       t.string :username
-      t.string :image
+      t.string :picture
 
       t.timestamps
     end

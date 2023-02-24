@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :user do
-    full_name { Faker::Name.name }
+    name { Faker::Name.name }
     email { Faker::Internet.email }
     username { Faker::Internet.username }
-    uid { Faker::Number.number(digits: 29) }
-    image { Faker::Internet.url }
+    sub { Faker::Number.number(digits: 29) }
+    picture { Faker::Internet.url }
   end
 end
