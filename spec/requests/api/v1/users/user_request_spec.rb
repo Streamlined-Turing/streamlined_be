@@ -18,7 +18,7 @@ RSpec.describe 'Users API' do
       new_user = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
-      expect(response.status).to eq(200)
+      expect(response.status).to eq(201)
       expect(new_user.size).to eq(1)
       expect(new_user).to have_key(:data)
       expect(new_user[:data]).to be_a(Hash)
@@ -51,6 +51,7 @@ RSpec.describe 'Users API' do
       existing_user = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
+      expect(response.status).to eq(200)
       expect(existing_user[:data]).to be_a(Hash)
       expect(existing_user[:data]).to have_key(:type)
       expect(existing_user[:data]).to have_key(:attributes)
@@ -64,7 +65,7 @@ RSpec.describe 'Users API' do
     end
 
     xit 'returns an error is the user is not created and do not exist' do 
-
+      # not sure if this is possible with oauth?
     end
   end
 

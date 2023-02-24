@@ -5,10 +5,11 @@ class Api::V1::UsersController < ApplicationController
 
     if user = User.find_by(uid: params[:uid]) 
       user
+      render json: UserSerializer.new(user), status: :ok
     else
       user = User.create(user_params)
+      render json: UserSerializer.new(user), status: :created
     end
-    render json: UserSerializer.new(user), status: 200
   end
 
   def show 
