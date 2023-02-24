@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'Users API' do 
-  describe 'create a user resource' do 
-    it 'can create a new user in the database' do 
+RSpec.describe 'Users API' do
+  describe 'create a user resource' do
+    it 'can create a new user in the database' do
       user_params = {
         "uid"=>"104505147435508023263",
         "full_name"=>"Alex Pitzel",
@@ -34,7 +34,7 @@ RSpec.describe 'Users API' do
       expect(new_user[:data][:attributes]).to_not have_key(:last_name)
     end
 
-    it 'returns an existing user from the database' do 
+    it 'returns an existing user from the database' do
       user = create(:user)
 
       user_params = {
@@ -47,7 +47,7 @@ RSpec.describe 'Users API' do
 
       headers = {"CONTENT_TYPE" => "application/json"}
       post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
-      
+
       existing_user = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
@@ -64,13 +64,36 @@ RSpec.describe 'Users API' do
       expect(existing_user[:data][:attributes][:image]).to eq(user.image)
     end
 
-    xit 'returns an error is the user is not created and do not exist' do 
+    xit 'returns an error is the user is not created and do not exist' do
       # not sure if this is possible with oauth?
     end
   end
 
-  describe 'show a user resource' do 
-    it 'can show a user by users id' do 
+  describe 'edit a user resource' do
+    it 'can update user attributes' do
+      user = User.create!(uid: "104505147435508023263",
+        email: "johnny@example.com",
+        full_name: "Johnny Appleseed",
+        image: "https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
+       )
+
+       expect(user.username).to be nil
+
+       update_params = { "username"=>"mr-apples" }
+       headers = {"CONTENT_TYPE" => "application/json"}
+
+       patch "/api/v1/users/#{user.id}", headers: headers, params: JSON.generate(update_params)
+
+       updated_user = JSON.parse(response.body, symbolize_names: true)
+
+       expect(response).to be_successful
+       expect(response.status).to eq(200)
+       expect(User.find(user.id).username).to eq('mr-apples')
+    end
+  end
+
+  describe 'show a user resource' do
+    it 'can show a user by users id' do
       user = User.create!(username: "Johnny",
                           uid: "104505147435508023263",
                           email: "johnny@example.com",
@@ -80,7 +103,7 @@ RSpec.describe 'Users API' do
 
       get "/api/v1/users/#{user.id}"
 
-      user_result = JSON.parse(response.body, symbolize_names: true) 
+      user_result = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
