@@ -13,8 +13,8 @@ RSpec.describe 'Users API' do
         "image"=>"https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
       }
       headers = {"CONTENT_TYPE" => "application/json"}
-      post "/api/v1/users", headers: headers, params: JSON.generate(user: user_params)
-      
+      post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
+
       new_user = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
@@ -28,13 +28,30 @@ RSpec.describe 'Users API' do
       expect(new_user[:data][:attributes]).to have_key(:uid)
       expect(new_user[:data][:attributes]).to have_key(:username)
       expect(new_user[:data][:attributes]).to have_key(:email)
-      expect(new_user[:data][:attributes]).to have_key(:first_name)
-      expect(new_user[:data][:attributes]).to have_key(:last_name)
+      expect(new_user[:data][:attributes]).to have_key(:full_name)
       expect(new_user[:data][:attributes]).to have_key(:image)
-      expect(new_user[:data][:attributes]).to_not have_key(:full_name)
+      expect(new_user[:data][:attributes]).to_not have_key(:first_name)
+      expect(new_user[:data][:attributes]).to_not have_key(:last_name)
     end
 
-    xit 'returns an existing user from the database' do 
+    it 'returns an existing user from the database' do 
+      user = create(:user)
+
+      user_params = {
+        "uid"=> user.uid,
+        "username"=>user.username,
+        "email"=>user.email,
+        "first_name"=>user.full_name,
+        "image"=>user.image
+      }
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post "/api/v1/users", headers: headers, params: JSON.generate(user: user_params)
+      
+      existing_user = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(existing_user[:data][:id].to_i).to eq(user.id)
 
     end
 
@@ -48,8 +65,7 @@ RSpec.describe 'Users API' do
       user = User.create!(username: "Johnny",
                           uid: "104505147435508023263",
                           email: "johnny@example.com",
-                          first_name: "Johnny",
-                          last_name: "James",
+                          full_name: "Johnny Appleseed",
                           image: "https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c"
                          )
 
@@ -74,13 +90,11 @@ RSpec.describe 'Users API' do
       expect(user_result[:data][:attributes][:username]).to eq("Johnny")
       expect(user_result[:data][:attributes]).to have_key(:email)
       expect(user_result[:data][:attributes][:email]).to eq("johnny@example.com")
-      expect(user_result[:data][:attributes]).to have_key(:first_name)
-      expect(user_result[:data][:attributes][:first_name]).to eq("Johnny")
-      expect(user_result[:data][:attributes]).to have_key(:last_name)
-      expect(user_result[:data][:attributes][:last_name]).to eq("James")
+      expect(user_result[:data][:attributes]).to have_key(:full_name)
+      expect(user_result[:data][:attributes][:full_name]).to eq("Johnny Appleseed")
+      expect(user_result[:data][:attributes]).to_not have_key(:last_name)
       expect(user_result[:data][:attributes]).to have_key(:image)
       expect(user_result[:data][:attributes][:image]).to eq("https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c")
-      expect(user_result[:data][:attributes]).to_not have_key(:full_name)
     end
   end
 end
