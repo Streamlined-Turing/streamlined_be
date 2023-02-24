@@ -1,6 +1,6 @@
-# StreamLined
+![Stream](https://user-images.githubusercontent.com/111480866/221070931-fce120af-633a-4ee3-9eab-dfe994549beb.png)
 
-## Project Overview
+# Streamlined Backend Service
 The goal of this project is to create a successful web application from a student-led project idea. Our team has created an app to solve a real world problem, allows users to authenticate with a third-party service, and consume at least two other apis. This project was created using Service Oriented Architecture. The frontend repo can be found [here](https://github.com/Streamlined-Turing/streamlined_fe).
 
 ## About StreamLined
@@ -20,7 +20,7 @@ This project requires Ruby 2.7.4
 4. Run `rails db:{drop,create,migrate,seed}`
 5. To run the test suite, run `bundle exec rspec`
 6. To run this server, enter `rails s`
-7. Open a browser window and go to http://localhost:3000
+7. Open a browser window and go to http://localhost:5000
 
 You should now be able to hit the API endpoints using Postman or a similar tool.
 
@@ -30,7 +30,10 @@ Ruby on Rails
 RSpec
 ```
 ## Database Schema
-![Screen Shot 2023-02-23 at 12 23 58 PM](https://user-images.githubusercontent.com/111480866/221022387-3f0a600d-83ed-43c0-ac53-2bee3e39085f.png)
+![Screen Shot 2023-02-23 at 3 51 51 PM](https://user-images.githubusercontent.com/111480866/221070847-eeb02ed9-43d7-4bff-a2c9-4d7d47a06602.png)
+
+## Json Contract for User
+![Screen Shot 2023-02-23 at 5 08 47 PM](https://user-images.githubusercontent.com/111480866/221070631-305e77dc-7456-4cd0-8aab-464f9125d4b1.png)
 
 ## API Endpoints
 ### Movie Details
@@ -53,4 +56,4 @@ RSpec
 
 ## API Credits 
 * [Watchmode](https://api.watchmode.com/)
-* API Credit (2)
+* [The Movie Database](https://developers.themoviedb.org/3/getting-started/introduction)
