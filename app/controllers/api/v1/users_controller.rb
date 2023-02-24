@@ -2,11 +2,11 @@ class Api::V1::UsersController < ApplicationController
   def create
     # we'll need to do this instead of find_or_create 
     # to account for possibility that user changed any email profile settings
+
     if user = User.find_by(uid: params[:uid]) 
-      return user
+      user
     else
       user = User.create(user_params)
-      return user
     end
     render json: UserSerializer.new(user), status: 200
   end
