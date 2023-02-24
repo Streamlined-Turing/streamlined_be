@@ -6,7 +6,8 @@ ruby '2.7.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.8', '>= 5.2.8.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -41,7 +42,7 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'simplecov', require: false
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
