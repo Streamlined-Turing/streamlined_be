@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Watchmode API' do 
   describe 'media details request' do 
     before(:each) do
-      stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=oPOCz5GkaVYBzuHGKiWLGu3nrNkzeHYcFJ89dd8e")
+      stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
     end
 
@@ -33,7 +33,7 @@ RSpec.describe 'Watchmode API' do
         :release_year,
         :runtime,
         :language,
-        :streaming_services,
+        :sub_services,
         :poster
       ].sort)
       expect(media_data[:data][:attributes][:id]).to be_an Integer
@@ -46,7 +46,10 @@ RSpec.describe 'Watchmode API' do
       expect(media_data[:data][:attributes][:release_year]).to be_an Integer
       expect(media_data[:data][:attributes][:runtime]).to be_an Integer
       expect(media_data[:data][:attributes][:language]).to be_a String
-      expect(media_data[:data][:attributes][:streaming_services]).to be_an Array
+      expect(media_data[:data][:attributes][:sub_services]).to be_an Array
+      media_data[:data][:attributes][:sub_services].each do |service|
+        expect(service).to be_a String
+      end
       expect(media_data[:data][:attributes][:poster]).to be_a String
     end
   end
