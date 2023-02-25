@@ -3,33 +3,33 @@ require 'rails_helper'
 RSpec.describe Media do
   before(:each) do
     @heavy_media_data = { :id => 3173903,
-                    :title => 'Breaking Bad',
-                    :original_title => 'Breaking Bad',
-                    :plot_overview =>
+                          :title => 'Breaking Bad',
+                          :original_title => 'Breaking Bad',
+                          :plot_overview =>
        'Guy things cancer is excuse to do crime.',
-                    :type => 'tv_series',
-                    :runtime_minutes => 45,
-                    :year => 2008,
-                    :end_year => 2013,
-                    :release_date => '2008-01-20',
-                    :imdb_id => 'tt0903747',
-                    :tmdb_id => 1396,
-                    :tmdb_type => 'tv',
-                    :genres => nil,
-                    :genre_names => ['Drama', 'Dark Comedy'],
-                    :user_rating => 9.3,
-                    :critic_score => 85,
-                    :us_rating => 'TV-MA',
-                    :poster => 'https://cdn.watchmode.com/posters/03173903_poster_w185.jpg',
-                    :backdrop => 'https://cdn.watchmode.com/backdrops/03173903_bd_w780.jpg',
-                    :original_language => 'en',
-                    :similar_titles => [3131293],
-                    :networks => [8],
-                    :network_names => ['AMC'],
-                    :relevance_percentile => 98.8,
-                    :trailer => 'https://www.youtube.com/watch?v=5NpEA2yaWVQ',
-                    :trailer_thumbnail => 'https://cdn.watchmode.com/video_thumbnails/536028_pthumbnail_320.jpg',
-                    :sources =>
+                          :type => 'tv_series',
+                          :runtime_minutes => 45,
+                          :year => 2008,
+                          :end_year => 2013,
+                          :release_date => '2008-01-20',
+                          :imdb_id => 'tt0903747',
+                          :tmdb_id => 1396,
+                          :tmdb_type => 'tv',
+                          :genres => nil,
+                          :genre_names => ['Drama', 'Dark Comedy'],
+                          :user_rating => 9.3,
+                          :critic_score => 85,
+                          :us_rating => 'TV-MA',
+                          :poster => 'https://cdn.watchmode.com/posters/03173903_poster_w185.jpg',
+                          :backdrop => 'https://cdn.watchmode.com/backdrops/03173903_bd_w780.jpg',
+                          :original_language => 'en',
+                          :similar_titles => [3131293],
+                          :networks => [8],
+                          :network_names => ['AMC'],
+                          :relevance_percentile => 98.8,
+                          :trailer => 'https://www.youtube.com/watch?v=5NpEA2yaWVQ',
+                          :trailer_thumbnail => 'https://cdn.watchmode.com/video_thumbnails/536028_pthumbnail_320.jpg',
+                          :sources =>
        [{ :source_id => 349,
           :name => 'iTunes',
           :type => 'buy',
@@ -64,15 +64,15 @@ RSpec.describe Media do
           :seasons => nil,
           :episodes => nil }] }
     @lite_media_data = {
-      resultType: "title",
+      resultType: 'title',
       id: 1516721,
-      name: "Everything Everywhere All at Once",
-      type: "movie",
+      name: 'Everything Everywhere All at Once',
+      type: 'movie',
       year: 2022,
-      imdb_id: "tt6710474",
+      imdb_id: 'tt6710474',
       tmdb_id: 545611,
-      tmdb_type: "movie"
-  }
+      tmdb_type: 'movie'
+    }
   end
 
   it 'can be created with detailed data' do
@@ -93,11 +93,10 @@ RSpec.describe Media do
     expect(media.imdb_id).to eq('tt0903747')
     expect(media.tmdb_id).to eq(1396)
     expect(media.tmdb_type).to eq('tv')
-    expect(media.trailer).to eq("https://www.youtube.com/watch?v=5NpEA2yaWVQ")
-
+    expect(media.trailer).to eq('https://www.youtube.com/watch?v=5NpEA2yaWVQ')
   end
 
-  it 'can be created with less detailed data' do 
+  it 'can be created with less detailed data' do
     media = Media.new(@lite_media_data)
 
     expect(media).to be_a Media

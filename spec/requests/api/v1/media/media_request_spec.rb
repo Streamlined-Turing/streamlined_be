@@ -5,7 +5,7 @@ RSpec.describe 'Watchmode API' do
     it 'sends media details' do
       stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV['watch_mode_api_key']}&append_to_response=sources")
         .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
-      
+
       expected_keys = [:id, :title, :audience_score, :rating, :type, :description, :genres, :release_year, :runtime, :language, :sub_services, :poster, :trailer, :imdb_id, :tmdb_id, :tmdb_type]
 
       show_id = 3173903
@@ -95,7 +95,6 @@ RSpec.describe 'Watchmode API' do
         expect(media_data[:attributes][:tmdb_id]).to be_a Integer
         expect(media_data[:attributes][:tmdb_type]).to be_a String
         expect(media_data[:attributes][:sub_services]).to eq([])
-        
       end
     end
 
