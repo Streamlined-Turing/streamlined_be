@@ -1,4 +1,4 @@
-class Api::V1::MediaDetailsController < ApplicationController 
+class Api::V1::MediaController < ApplicationController 
 
   def show 
     media = MediaFacade.details(params[:id])

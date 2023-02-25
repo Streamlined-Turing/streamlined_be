@@ -7,7 +7,7 @@ RSpec.describe 'Watchmode API' do
       .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
 
       show_id = 3173903
-      get "/api/v1/media_details/#{show_id}"
+      get "/api/v1/media/#{show_id}"
 
       media_data = JSON.parse(response.body, symbolize_names: true)
       
@@ -56,7 +56,7 @@ RSpec.describe 'Watchmode API' do
       .to_return(status: 404, body: File.read('spec/fixtures/media_details_404.json'), headers: {})
 
       show_id = 3173903
-      get "/api/v1/media_details/show_id"
+      get "/api/v1/media/show_id"
 
       media_data = JSON.parse(response.body, symbolize_names: true)
 
