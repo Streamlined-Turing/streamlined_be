@@ -6,7 +6,7 @@ RSpec.describe Media do
       :title=>"Breaking Bad",
       :original_title=>"Breaking Bad",
       :plot_overview=>
-       "When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
+       "Guy things cancer is excuse to do crime.",
       :type=>"tv_series",
       :runtime_minutes=>45,
       :year=>2008,
@@ -69,21 +69,17 @@ RSpec.describe Media do
     media = Media.new(@media_data)
 
     expect(media).to be_a Media
-    expect(media.id).to be_a Integer
-    expect(media.title).to be_a String
-    expect(media.audience_score).to be_a Float
-    expect(media.rating).to be_a String
-    expect(media.type).to be_a String
-    expect(media.description).to be_a String
-    expect(media.genres).to be_a Array
-    media.genres.each do |genre|
-      expect(genre).to be_a String
-    end
-    expect(media.release_year).to be_a Integer
-    expect(media.runtime).to be_a Integer
-    expect(media.language).to be_a String
-    expect(media.streaming_services).to be_a Array
-    expect(media.poster).to be_a String
+    expect(media.title).to eq('Breaking Bad')
+    expect(media.audience_score).to eq(9.3)
+    expect(media.rating).to eq('TV-MA')
+    expect(media.type).to eq('tv_series')
+    expect(media.description).to eq('Guy things cancer is excuse to do crime.')
+    expect(media.genres).to eq(['Drama', 'Dark Comedy'])
+    expect(media.release_year).to eq(2008)
+    expect(media.runtime).to eq(45)
+    expect(media.language).to eq('en')
+    expect(media.sub_services).to eq(['Netflix'])
+    expect(media.poster).to eq('https://cdn.watchmode.com/posters/03173903_poster_w185.jpg')
   end
   
   describe '#subscription_services' do
