@@ -7,6 +7,6 @@ class MediaService
   private
 
   def self.conn
-    Faraday.new(url: 'https://api.watchmode.com', params: { apiKey: ENV['watch_mode_api_key']})
+    Faraday.new(url: 'https://api.watchmode.com', params: { apiKey: ENV['watch_mode_api_key'] })
   end
 end
