@@ -26,7 +26,4 @@ class Media
     @streaming_services = media_data[:sources]
     @poster             = media_data[:poster]
   end
-
-  # make a method to find the streaming services wher type is 'sub' 
-  # or 'free' maybe? 
 end
