@@ -10,7 +10,7 @@ class Media
               :runtime,
               :language,
               :streaming_services,
-              :poster
+              :poster,
 
   def initialize(media_data)
     @id                 = media_data[:id]
@@ -27,6 +27,8 @@ class Media
     @poster             = media_data[:poster]
     @sub_services       = subscription_services
   end
+
+  # will want to add @sub_service to the serializer and remove @streaming_services
 
   def subscription_services
     # return ['Not Available For Streaming'] if streaming_services == []
