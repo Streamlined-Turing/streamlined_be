@@ -9,7 +9,7 @@ class Media
               :release_year,
               :runtime,
               :language,
-              :streaming_services,
+              :sub_services,
               :poster
 
   def initialize(media_data)
@@ -25,5 +25,14 @@ class Media
     @language           = media_data[:original_language]
     @streaming_services = media_data[:sources]
     @poster             = media_data[:poster]
+    @sub_services       = subscription_services
+  end
+
+
+  def subscription_services
+    services = @streaming_services.select do |service|
+      service[:type] == 'sub'
+    end
+    services.map { |service| service[:name] }
   end
 end
