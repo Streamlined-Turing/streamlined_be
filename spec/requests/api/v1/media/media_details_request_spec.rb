@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Watchmode API' do
-  describe 'media details request' do
-    it 'receives media details' do
+  describe 'get media/id' do
+    it 'sends media details' do
       stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
 
@@ -67,6 +67,12 @@ RSpec.describe 'Watchmode API' do
                                  statusCode: 404,
                                  statusMessage: 'The resource could not be found.'
                                })
+    end
+  end
+
+  describe 'get media?query=' do
+    it 'returns an array of media with title matching query param' do
+      
     end
   end
 end
