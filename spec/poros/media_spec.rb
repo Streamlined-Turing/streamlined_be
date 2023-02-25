@@ -110,7 +110,7 @@ RSpec.describe Media do
     expect(media.release_year).to eq(2022)
     expect(media.runtime).to be nil
     expect(media.language).to be nil
-    expect(media.sub_services).to be nil
+    expect(media.sub_services).to eq([])
     expect(media.poster).to be nil
     expect(media.imdb_id).to eq('tt6710474')
     expect(media.tmdb_id).to eq(545611)
