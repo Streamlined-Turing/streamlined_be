@@ -5,12 +5,12 @@ RSpec.describe 'Watchmode API' do
     it 'sends media details' do
       stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
+      expected_keys = [:id, :title, :audience_score, :rating, :type, :description, :genres, :release_year, :runtime, :language, :sub_services, :poster, :trailer, :imdb_id, :tmdb_id, :tmdb_type]
 
       show_id = 3173903
       get "/api/v1/media/#{show_id}"
 
       media_data = JSON.parse(response.body, symbolize_names: true)
-
       expect(response).to be_successful
       expect(response.status).to eq(200)
       expect(media_data).to be_a Hash
@@ -20,20 +20,7 @@ RSpec.describe 'Watchmode API' do
       expect(media_data[:data][:id]).to be_a String
       expect(media_data[:data][:type]).to eq('media')
       expect(media_data[:data][:attributes]).to be_a Hash
-      expect(media_data[:data][:attributes].keys.sort).to eq([
-        :id,
-        :title,
-        :audience_score,
-        :rating,
-        :type,
-        :description,
-        :genres,
-        :release_year,
-        :runtime,
-        :language,
-        :sub_services,
-        :poster
-      ].sort)
+      expect(media_data[:data][:attributes].keys.sort).to eq(expected_keys.sort)
       expect(media_data[:data][:attributes][:id]).to be_an Integer
       expect(media_data[:data][:attributes][:title]).to be_a String
       expect(media_data[:data][:attributes][:audience_score]).to be_a Float
@@ -49,6 +36,10 @@ RSpec.describe 'Watchmode API' do
         expect(service).to be_a String
       end
       expect(media_data[:data][:attributes][:poster]).to be_a String
+      expect(media_data[:data][:attributes][:trailer]).to be_a String
+      expect(media_data[:data][:attributes][:imdb_id]).to be_a String
+      expect(media_data[:data][:attributes][:tmdb_id]).to be_a Integer
+      expect(media_data[:data][:attributes][:tmdb_type]).to be_a String
     end
 
     it 'returns an error message when an incorrect id is passed' do
@@ -70,9 +61,51 @@ RSpec.describe 'Watchmode API' do
     end
   end
 
-  describe 'get media?query=' do
+  describe 'get media?q=' do
     it 'returns an array of media with title matching query param' do
-      
+      stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=everything&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
+        .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
+
+      expected_keys = [:id, :title, :type, :release_year, :imdb_id, :tmdb_id, :tmdb_type]
+
+      query = 'everything'
+      get "/api/v1/media?q=#{query}"
+
+      search_result = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      expect(search_result).to be_a Hash
+      expect(search_result[:data]).to be_a Array
+      search_result[:data].each do |media_data|
+        expect(media_data).to be_a Hash
+        expect(media_data.keys.sort).to eq([:id, :type, :attributes].sort)
+        expect(media_data[:id]).to be_a String
+        expect(media_data[:type]).to eq('media')
+        expect(media_data[:attributes]).to be_a Hash
+        expect((expected_keys - media_data[:attributes].keys).empty?).to be true
+        (media_data[:attributes].keys - expected_keys).each do |key|
+          expect(media_data[:attributes][key]).to be nil
+        end
+        expect(media_data[:attributes][:id]).to be_a Integer
+        expect(media_data[:attributes][:title]).to be_a String
+        expect(media_data[:attributes][:type]).to be_a String
+        expect(media_data[:attributes][:release_year]).to be_a Integer
+        expect(media_data[:attributes][:imdb_id]).to be_a String
+        expect(media_data[:attributes][:tmdb_id]).to be_a Integer
+        expect(media_data[:attributes][:tmdb_type]).to be_a String
+      end
+    end
+
+    it 'returns hash with data and an empty array if no matches for query' do
+      query = 'tyranorsauriouesbadfasdfg'
+      stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=#{query}&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
+        .to_return(status: 200, body: File.read('spec/fixtures/search_no_results.json'), headers: {})
+
+      get "/api/v1/media?q=#{query}"
+      no_result = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(no_result).to eq({ :data => [] })
     end
   end
 end
