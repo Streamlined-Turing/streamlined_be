@@ -1,6 +1,6 @@
 class MediaService
   def self.details(id)
-    response = conn.get("/v1/title/#{id}/details")
+    response = conn.get("/v1/title/#{id}/details", { append_to_response: 'sources' })
     parse_json(response)
   end
 

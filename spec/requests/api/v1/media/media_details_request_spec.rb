@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe 'Watchmode API' do
   describe 'get media/id' do
     it 'sends media details' do
-      stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV['watch_mode_api_key']}")
+      stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV['watch_mode_api_key']}&append_to_response=sources")
         .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
+      
       expected_keys = [:id, :title, :audience_score, :rating, :type, :description, :genres, :release_year, :runtime, :language, :sub_services, :poster, :trailer, :imdb_id, :tmdb_id, :tmdb_type]
 
       show_id = 3173903
@@ -43,7 +44,7 @@ RSpec.describe 'Watchmode API' do
     end
 
     it 'returns an error message when an incorrect id is passed' do
-      stub_request(:get, "https://api.watchmode.com/v1/title/show_id/details?apiKey=#{ENV['watch_mode_api_key']}")
+      stub_request(:get, "https://api.watchmode.com/v1/title/show_id/details?apiKey=#{ENV['watch_mode_api_key']}&append_to_response=sources")
         .to_return(status: 404, body: File.read('spec/fixtures/media_details_404.json'), headers: {})
 
       show_id = 3173903
@@ -66,7 +67,7 @@ RSpec.describe 'Watchmode API' do
       stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=everything&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
 
-      expected_keys = [:id, :title, :type, :release_year, :imdb_id, :tmdb_id, :tmdb_type]
+      expected_keys = [:id, :title, :type, :release_year, :imdb_id, :tmdb_id, :tmdb_type, :sub_services]
 
       query = 'everything'
       get "/api/v1/media?q=#{query}"
@@ -93,6 +94,8 @@ RSpec.describe 'Watchmode API' do
         expect(media_data[:attributes][:imdb_id]).to be_a String
         expect(media_data[:attributes][:tmdb_id]).to be_a Integer
         expect(media_data[:attributes][:tmdb_type]).to be_a String
+        expect(media_data[:attributes][:sub_services]).to eq([])
+        
       end
     end
 
