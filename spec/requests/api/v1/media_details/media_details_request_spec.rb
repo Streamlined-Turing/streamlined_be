@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Watchmode API' do 
   describe 'media details request' do 
     before(:each) do
-      stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=oPOCz5GkaVYBzuHGKiWLGu3nrNkzeHYcFJ89dd8e")
+      stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV["watch_mode_api_key"]}")
         .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
     end
 
