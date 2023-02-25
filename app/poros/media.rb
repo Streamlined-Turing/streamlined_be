@@ -37,7 +37,7 @@ class Media
   end
 
   def subscription_services
-    return nil unless @streaming_services
+    return [] unless @streaming_services
 
     services = @streaming_services.select do |service|
       service[:type] == 'sub'
