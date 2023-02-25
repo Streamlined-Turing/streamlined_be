@@ -10,6 +10,6 @@ class MediaSerializer
               :release_year,
               :runtime,
               :language,
-              :streaming_services,
+              :sub_services,
               :poster
 end
