@@ -12,4 +12,9 @@ class Api::V1::MediaController < ApplicationController
       render json: error, status: :not_found
     end
   end
+
+  def index
+    results = MediaFacade.search(params[:q])
+    render json: MediaSerializer.new(results)
+  end
 end
