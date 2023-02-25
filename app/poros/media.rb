@@ -28,7 +28,6 @@ class Media
     @sub_services       = subscription_services
   end
 
-
   def subscription_services
     services = @streaming_services.select do |service|
       service[:type] == 'sub'
