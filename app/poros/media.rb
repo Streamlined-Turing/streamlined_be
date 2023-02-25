@@ -27,6 +27,18 @@ class Media
     @poster             = media_data[:poster]
   end
 
+  def subscription_services
+    # return ['Not Available For Streaming'] if streaming_services == []
+    # this was an idea but doesn't seem to be appropriate to be handled by poros 
+    # maybe should be done in view on FE
+    services = streaming_services.select do |service|
+      service[:type] == 'sub'
+    end
+    services.map do |service|
+      service[:name]
+    end
+  end
+
   # make a method to find the streaming services wher type is 'sub' 
   # or 'free' maybe? 
 end
