@@ -25,12 +25,15 @@ class Media
     @language           = media_data[:original_language]
     @streaming_services = media_data[:sources]
     @poster             = media_data[:poster]
+    @sub_services       = subscription_services
   end
 
   def subscription_services
     # return ['Not Available For Streaming'] if streaming_services == []
-    # this was an idea but doesn't seem to be appropriate to be handled by poros 
+
+    # ^^ this was an idea but doesn't seem to be appropriate to be handled by poros 
     # maybe should be done in view on FE
+
     services = streaming_services.select do |service|
       service[:type] == 'sub'
     end
@@ -38,7 +41,4 @@ class Media
       service[:name]
     end
   end
-
-  # make a method to find the streaming services wher type is 'sub' 
-  # or 'free' maybe? 
 end
