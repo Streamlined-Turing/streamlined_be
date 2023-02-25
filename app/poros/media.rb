@@ -9,8 +9,8 @@ class Media
               :release_year,
               :runtime,
               :language,
-              :streaming_services,
-              :poster,
+              :sub_services,
+              :poster
 
   def initialize(media_data)
     @id                 = media_data[:id]
@@ -28,19 +28,11 @@ class Media
     @sub_services       = subscription_services
   end
 
-  # will want to add @sub_service to the serializer and remove @streaming_services
 
   def subscription_services
-    # return ['Not Available For Streaming'] if streaming_services == []
-
-    # ^^ this was an idea but doesn't seem to be appropriate to be handled by poros 
-    # maybe should be done in view on FE
-
-    services = streaming_services.select do |service|
+    services = @streaming_services.select do |service|
       service[:type] == 'sub'
     end
-    services.map do |service|
-      service[:name]
-    end
+    services.map { |service| service[:name] }
   end
 end
