@@ -64,12 +64,12 @@ RSpec.describe 'Watchmode API' do
 
   describe 'get media?q=' do
     it 'returns an array of media with title matching query param' do
-      stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=everything&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
+      query = 'everything'
+      stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=#{query}&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
 
       expected_keys = [:id, :title, :type, :release_year, :imdb_id, :tmdb_id, :tmdb_type, :sub_services]
 
-      query = 'everything'
       get "/api/v1/media?q=#{query}"
 
       search_result = JSON.parse(response.body, symbolize_names: true)
