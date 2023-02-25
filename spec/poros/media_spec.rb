@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Media do
   before(:each) do
-    @media_data = { :id => 3173903,
+    @heavy_media_data = { :id => 3173903,
                     :title => 'Breaking Bad',
                     :original_title => 'Breaking Bad',
                     :plot_overview =>
@@ -63,10 +63,20 @@ RSpec.describe Media do
           :price => nil,
           :seasons => nil,
           :episodes => nil }] }
+    @lite_media_data = {
+      resultType: "title",
+      id: 1516721,
+      name: "Everything Everywhere All at Once",
+      type: "movie",
+      year: 2022,
+      imdb_id: "tt6710474",
+      tmdb_id: 545611,
+      tmdb_type: "movie"
+  }
   end
 
-  it 'exists with attributes' do
-    media = Media.new(@media_data)
+  it 'can be created with detailed data' do
+    media = Media.new(@heavy_media_data)
 
     expect(media).to be_a Media
     expect(media.title).to eq('Breaking Bad')
@@ -80,12 +90,38 @@ RSpec.describe Media do
     expect(media.language).to eq('en')
     expect(media.sub_services).to eq(['Netflix'])
     expect(media.poster).to eq('https://cdn.watchmode.com/posters/03173903_poster_w185.jpg')
+    expect(media.imdb_id).to eq('tt0903747')
+    expect(media.tmdb_id).to eq(1396)
+    expect(media.tmdb_type).to eq('tv')
+    expect(media.trailer).to eq("https://www.youtube.com/watch?v=5NpEA2yaWVQ")
+
+  end
+
+  it 'can be created with less detailed data' do 
+    media = Media.new(@lite_media_data)
+
+    expect(media).to be_a Media
+    expect(media.title).to eq('Everything Everywhere All at Once')
+    expect(media.audience_score).to be nil
+    expect(media.rating).to be nil
+    expect(media.type).to eq('movie')
+    expect(media.description).to be nil
+    expect(media.genres).to be nil
+    expect(media.release_year).to eq(2022)
+    expect(media.runtime).to be nil
+    expect(media.language).to be nil
+    expect(media.sub_services).to be nil
+    expect(media.poster).to be nil
+    expect(media.imdb_id).to eq('tt6710474')
+    expect(media.tmdb_id).to eq(545611)
+    expect(media.tmdb_type).to eq('movie')
+    expect(media.trailer).to be nil
   end
 
   describe '#subscription_services' do
     it 'returns the services media is available with a subscription' do
       media0 = Media.new({ :sources => [] })
-      media1 = Media.new(@media_data)
+      media1 = Media.new(@heavy_media_data)
       media2 = Media.new(:sources =>
         [{ :source_id => 349,
            :name => 'Prime',
