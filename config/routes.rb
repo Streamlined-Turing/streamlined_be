@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, except: :index
       resources :media, only: [:show, :index]
+      resources :trending_media, only: :index
     end
   end
 end
