@@ -4,12 +4,16 @@ class MediaSerializer
               :title,
               :audience_score,
               :rating,
-              :type,
+              :media_type,
               :description,
               :genres,
               :release_year,
               :runtime,
               :language,
               :sub_services,
-              :poster
+              :poster,
+              :imdb_id,
+              :tmdb_id,
+              :tmdb_type,
+              :trailer
 end
