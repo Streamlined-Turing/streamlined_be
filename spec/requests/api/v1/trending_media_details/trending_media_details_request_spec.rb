@@ -27,6 +27,7 @@ RSpec.describe 'MovieDB API' do
       expect(media_data[:data][0][:attributes][:media_type]).to be_a String
       expect(media_data[:data][0][:attributes]).to have_key(:vote_average)
       expect(media_data[:data][0][:attributes][:vote_average]).to be_a Float
+      expect(media_data[:data][0][:attributes]).to_not have_key(:overview)
     end
   end
 end

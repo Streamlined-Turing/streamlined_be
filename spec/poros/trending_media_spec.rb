@@ -30,5 +30,9 @@ RSpec.describe TrendingMedia do
 
     expect(media).to be_a TrendingMedia
     expect(media.id).to eq(1077280)
+    expect(media.title).to eq("Die Hart the Movie")
+    expect(media.poster_path).to eq("/1EnBjTJ5utgT1OXYBZ8YwByRCzP.jpg")
+    expect(media.media_type).to eq("movie")
+    expect(media.vote_average).to eq(6.3)
   end
 end
