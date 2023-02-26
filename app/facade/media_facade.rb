@@ -6,7 +6,7 @@ class MediaFacade
 
   def self.search(query)
     search_results = MediaService.search(query)
-    search_results[:title_results].map do |media_data|
+    search_results[:results].map do |media_data|
       Media.new(media_data)
     end
   end
