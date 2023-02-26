@@ -7,7 +7,7 @@ RSpec.describe MediaFacade do
       .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
 
     @query = 'everything'
-    stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=#{@query}&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
+    stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_value=#{@query}&search_type=2&apiKey=#{ENV['watch_mode_api_key']}")
       .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
   end
 

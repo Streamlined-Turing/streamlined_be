@@ -65,7 +65,7 @@ RSpec.describe 'Watchmode API' do
   describe 'get media?q=' do
     it 'returns an array of media with title matching query param' do
       query = 'everything'
-      stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=#{query}&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
+      stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_value=#{query}&search_type=2&apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
 
       expected_keys = [:id, :title, :type, :release_year, :imdb_id, :tmdb_id, :tmdb_type, :sub_services]
@@ -81,12 +81,9 @@ RSpec.describe 'Watchmode API' do
         expect(media_data).to be_a Hash
         expect(media_data.keys.sort).to eq([:id, :type, :attributes].sort)
         expect(media_data[:id]).to be_a String
-        expect(media_data[:type]).to eq('media')
+        expect(media_data[:type]).to eq('search_result')
         expect(media_data[:attributes]).to be_a Hash
-        expect((expected_keys - media_data[:attributes].keys).empty?).to be true
-        (media_data[:attributes].keys - expected_keys).each do |key|
-          expect(media_data[:attributes][key]).to be nil
-        end
+        expect(media_data[:attributes].keys.sort).to eq(expected_keys)
         expect(media_data[:attributes][:id]).to be_a Integer
         expect(media_data[:attributes][:title]).to be_a String
         expect(media_data[:attributes][:type]).to be_a String
@@ -100,7 +97,7 @@ RSpec.describe 'Watchmode API' do
 
     it 'returns hash with data and an empty array if no matches for query' do
       query = 'tyranorsauriouesbadfasdfg'
-      stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=#{query}&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
+      stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_value=#{query}&search_type=2&apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/search_no_results.json'), headers: {})
 
       get "/api/v1/media?q=#{query}"

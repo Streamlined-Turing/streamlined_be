@@ -5,7 +5,7 @@ class MediaService
   end
 
   def self.search(query)
-    response = conn.get('/v1/search/', { search_field: 'name', search_value: query, types: 'tv,movie' })
+    response = conn.get('/v1/autocomplete-search/', { search_field: 'name', search_value: query, search_type: '2' })
     parse_json(response)
   end
 

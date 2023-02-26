@@ -7,7 +7,7 @@ RSpec.describe MediaService do
       .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
 
     @query = 'everything'
-    stub_request(:get, "https://api.watchmode.com/v1/search/?search_field=name&search_value=#{@query}&types=tv,movie&apiKey=#{ENV['watch_mode_api_key']}")
+    stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_value=#{@query}&search_type=2&apiKey=#{ENV['watch_mode_api_key']}")
       .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
   end
 
@@ -33,11 +33,10 @@ RSpec.describe MediaService do
       it 'returns an array of results matching query' do
         response = MediaService.search(@query)
 
-        expected_keys = [:resultType, :id, :name, :type, :year, :imdb_id, :tmdb_id, :tmdb_type]
-        expect(response).to have_key(:people_results)
-        expect(response[:people_results]).to eq([])
-        expect(response).to have_key(:title_results)
-        response[:title_results].each do |result|
+        expected_keys = [:name, :relevance, :type, :id, :year, :result_type, :tmdb_id, :tmdb_type, :image_url]
+        expect(response.keys).to eq([:results])
+        expect(response[:results]).to be_a Array
+        response[:results].each do |result|
           expect(result.keys.sort).to eq(expected_keys.sort)
         end
       end
