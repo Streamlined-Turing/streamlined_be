@@ -90,7 +90,7 @@ RSpec.describe Media do
     expect(media.runtime).to eq(45)
     expect(media.language).to eq('en')
     expect(media.sub_services).to eq(['Netflix'])
-    expect(media.poster_path).to eq('https://cdn.watchmode.com/posters/03173903_poster_w185.jpg')
+    expect(media.poster).to eq('https://cdn.watchmode.com/posters/03173903_poster_w185.jpg')
     expect(media.imdb_id).to eq('tt0903747')
     expect(media.tmdb_id).to eq(1396)
     expect(media.tmdb_type).to eq('tv')
@@ -111,7 +111,7 @@ RSpec.describe Media do
     expect(media.runtime).to be nil
     expect(media.language).to be nil
     expect(media.sub_services).to eq([])
-    expect(media.poster_path).to eq('https://cdn.watchmode.com/posters/01516721_poster_w185.jpg')
+    expect(media.poster).to eq('https://cdn.watchmode.com/posters/01516721_poster_w185.jpg')
     expect(media.imdb_id).to be nil
     expect(media.tmdb_id).to eq(545611)
     expect(media.tmdb_type).to eq('movie')

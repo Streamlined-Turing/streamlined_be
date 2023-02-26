@@ -11,7 +11,7 @@ class MediaSerializer
               :runtime,
               :language,
               :sub_services,
-              :poster_path,
+              :poster,
               :imdb_id,
               :tmdb_id,
               :tmdb_type,

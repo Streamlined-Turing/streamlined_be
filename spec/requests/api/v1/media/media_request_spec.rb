@@ -7,7 +7,7 @@ RSpec.describe 'Watchmode API' do
         .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
 
       expected_keys = [:id, :title, :audience_score, :rating, :media_type, :description, :genres, :release_year,
-                       :runtime, :language, :sub_services, :poster_path, :trailer, :imdb_id, :tmdb_id, :tmdb_type]
+                       :runtime, :language, :sub_services, :poster, :trailer, :imdb_id, :tmdb_id, :tmdb_type]
 
       show_id = 3173903
       get "/api/v1/media/#{show_id}"
@@ -38,7 +38,7 @@ RSpec.describe 'Watchmode API' do
       media_data[:data][:attributes][:sub_services].each do |service|
         expect(service).to be_a String
       end
-      expect(media_data[:data][:attributes][:poster_path]).to be_a String
+      expect(media_data[:data][:attributes][:poster]).to be_a String
       expect(media_data[:data][:attributes][:trailer]).to be_a String
       expect(media_data[:data][:attributes][:imdb_id]).to be_a String
       expect(media_data[:data][:attributes][:tmdb_id]).to be_a Integer
@@ -70,7 +70,7 @@ RSpec.describe 'Watchmode API' do
       stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_value=#{query}&search_type=2&apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
 
-      expected_keys = [:id, :title, :media_type, :release_year, :tmdb_id, :tmdb_type, :poster_path]
+      expected_keys = [:id, :title, :media_type, :release_year, :tmdb_id, :tmdb_type, :poster]
 
       get "/api/v1/media?q=#{query}"
 
@@ -93,7 +93,7 @@ RSpec.describe 'Watchmode API' do
         expect(media_data[:attributes][:release_year]).to be_a Integer
         expect(media_data[:attributes][:tmdb_id]).to be_a Integer
         expect(media_data[:attributes][:tmdb_type]).to be_a String
-        expect(media_data[:attributes][:poster_path]).to be_a String
+        expect(media_data[:attributes][:poster]).to be_a String
       end
     end
 

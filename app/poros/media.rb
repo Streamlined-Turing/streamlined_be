@@ -10,7 +10,7 @@ class Media
               :runtime,
               :language,
               :sub_services,
-              :poster_path,
+              :poster,
               :imdb_id,
               :tmdb_id,
               :tmdb_type,
@@ -28,7 +28,7 @@ class Media
     @runtime            = media_data[:runtime_minutes]
     @language           = media_data[:original_language]
     @streaming_services = media_data[:sources]
-    @poster_path        = media_data[:poster] || media_data[:image_url]
+    @poster             = media_data[:poster] || media_data[:image_url]
     @imdb_id            = media_data[:imdb_id]
     @tmdb_id            = media_data[:tmdb_id]
     @tmdb_type          = media_data[:tmdb_type]
