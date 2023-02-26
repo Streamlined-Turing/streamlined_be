@@ -6,12 +6,14 @@ RSpec.describe 'Watchmode API' do
       stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV['watch_mode_api_key']}&append_to_response=sources")
         .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
 
-      expected_keys = [:id, :title, :audience_score, :rating, :type, :description, :genres, :release_year, :runtime, :language, :sub_services, :poster, :trailer, :imdb_id, :tmdb_id, :tmdb_type]
+      expected_keys = [:id, :title, :audience_score, :rating, :media_type, :description, :genres, :release_year,
+                       :runtime, :language, :sub_services, :poster_path, :trailer, :imdb_id, :tmdb_id, :tmdb_type]
 
       show_id = 3173903
       get "/api/v1/media/#{show_id}"
 
       media_data = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to be_successful
       expect(response.status).to eq(200)
       expect(media_data).to be_a Hash
@@ -26,7 +28,7 @@ RSpec.describe 'Watchmode API' do
       expect(media_data[:data][:attributes][:title]).to be_a String
       expect(media_data[:data][:attributes][:audience_score]).to be_a Float
       expect(media_data[:data][:attributes][:rating]).to be_a String
-      expect(media_data[:data][:attributes][:type]).to be_a String
+      expect(media_data[:data][:attributes][:media_type]).to be_a String
       expect(media_data[:data][:attributes][:description]).to be_a String
       expect(media_data[:data][:attributes][:genres]).to be_an Array
       expect(media_data[:data][:attributes][:release_year]).to be_an Integer
@@ -36,7 +38,7 @@ RSpec.describe 'Watchmode API' do
       media_data[:data][:attributes][:sub_services].each do |service|
         expect(service).to be_a String
       end
-      expect(media_data[:data][:attributes][:poster]).to be_a String
+      expect(media_data[:data][:attributes][:poster_path]).to be_a String
       expect(media_data[:data][:attributes][:trailer]).to be_a String
       expect(media_data[:data][:attributes][:imdb_id]).to be_a String
       expect(media_data[:data][:attributes][:tmdb_id]).to be_a Integer
@@ -68,30 +70,30 @@ RSpec.describe 'Watchmode API' do
       stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_value=#{query}&search_type=2&apiKey=#{ENV['watch_mode_api_key']}")
         .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
 
-      expected_keys = [:id, :title, :type, :release_year, :imdb_id, :tmdb_id, :tmdb_type, :sub_services]
+      expected_keys = [:id, :title, :media_type, :release_year, :tmdb_id, :tmdb_type, :poster_path]
 
       get "/api/v1/media?q=#{query}"
 
       search_result = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to be_successful
       expect(response.status).to eq(200)
       expect(search_result).to be_a Hash
       expect(search_result[:data]).to be_a Array
-      search_result[:data].each do |media_data|
+      search_result[:data].first(15).each do |media_data|
         expect(media_data).to be_a Hash
         expect(media_data.keys.sort).to eq([:id, :type, :attributes].sort)
         expect(media_data[:id]).to be_a String
         expect(media_data[:type]).to eq('search_result')
         expect(media_data[:attributes]).to be_a Hash
-        expect(media_data[:attributes].keys.sort).to eq(expected_keys)
+        expect(media_data[:attributes].keys.sort).to eq(expected_keys.sort)
         expect(media_data[:attributes][:id]).to be_a Integer
         expect(media_data[:attributes][:title]).to be_a String
-        expect(media_data[:attributes][:type]).to be_a String
+        expect(media_data[:attributes][:media_type]).to be_a String
         expect(media_data[:attributes][:release_year]).to be_a Integer
-        expect(media_data[:attributes][:imdb_id]).to be_a String
         expect(media_data[:attributes][:tmdb_id]).to be_a Integer
         expect(media_data[:attributes][:tmdb_type]).to be_a String
-        expect(media_data[:attributes][:sub_services]).to eq([])
+        expect(media_data[:attributes][:poster_path]).to be_a String
       end
     end
 

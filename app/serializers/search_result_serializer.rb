@@ -1,12 +1,4 @@
 class SearchResultSerializer
   include JSONAPI::Serializer
-  attributes  :id,
-              :title,
-              :type,
-              :release_year,
-              :runtime,
-              :language,
-              :imdb_id,
-              :tmdb_id,
-              :tmdb_type
+  attributes :id, :title, :media_type, :release_year, :tmdb_id, :tmdb_type, :poster_path
 end

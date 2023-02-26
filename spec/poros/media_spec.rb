@@ -64,14 +64,15 @@ RSpec.describe Media do
           :seasons => nil,
           :episodes => nil }] }
     @lite_media_data = {
-      resultType: 'title',
-      id: 1516721,
       name: 'Everything Everywhere All at Once',
+      relevance: 250,
       type: 'movie',
+      id: 1516721,
       year: 2022,
-      imdb_id: 'tt6710474',
+      result_type: 'title',
       tmdb_id: 545611,
-      tmdb_type: 'movie'
+      tmdb_type: 'movie',
+      image_url: 'https://cdn.watchmode.com/posters/01516721_poster_w185.jpg'
     }
   end
 
@@ -82,14 +83,14 @@ RSpec.describe Media do
     expect(media.title).to eq('Breaking Bad')
     expect(media.audience_score).to eq(9.3)
     expect(media.rating).to eq('TV-MA')
-    expect(media.type).to eq('tv_series')
+    expect(media.media_type).to eq('tv_series')
     expect(media.description).to eq('Guy things cancer is excuse to do crime.')
     expect(media.genres).to eq(['Drama', 'Dark Comedy'])
     expect(media.release_year).to eq(2008)
     expect(media.runtime).to eq(45)
     expect(media.language).to eq('en')
     expect(media.sub_services).to eq(['Netflix'])
-    expect(media.poster).to eq('https://cdn.watchmode.com/posters/03173903_poster_w185.jpg')
+    expect(media.poster_path).to eq('https://cdn.watchmode.com/posters/03173903_poster_w185.jpg')
     expect(media.imdb_id).to eq('tt0903747')
     expect(media.tmdb_id).to eq(1396)
     expect(media.tmdb_type).to eq('tv')
@@ -103,15 +104,15 @@ RSpec.describe Media do
     expect(media.title).to eq('Everything Everywhere All at Once')
     expect(media.audience_score).to be nil
     expect(media.rating).to be nil
-    expect(media.type).to eq('movie')
+    expect(media.media_type).to eq('movie')
     expect(media.description).to be nil
     expect(media.genres).to be nil
     expect(media.release_year).to eq(2022)
     expect(media.runtime).to be nil
     expect(media.language).to be nil
     expect(media.sub_services).to eq([])
-    expect(media.poster).to be nil
-    expect(media.imdb_id).to eq('tt6710474')
+    expect(media.poster_path).to eq('https://cdn.watchmode.com/posters/01516721_poster_w185.jpg')
+    expect(media.imdb_id).to be nil
     expect(media.tmdb_id).to eq(545611)
     expect(media.tmdb_type).to eq('movie')
     expect(media.trailer).to be nil
