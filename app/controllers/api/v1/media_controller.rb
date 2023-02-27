@@ -14,7 +14,11 @@ class Api::V1::MediaController < ApplicationController
   end
 
   def index
-    results = MediaFacade.search(params[:q])
+    if params[:q].present?
+      results = MediaFacade.search(params[:q])
+    else
+      results = []
+    end
     render json: SearchResultSerializer.new(results)
   end
 end

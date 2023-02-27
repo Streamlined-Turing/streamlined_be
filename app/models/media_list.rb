@@ -7,9 +7,9 @@ class MediaList < ApplicationRecord
 
   after_destroy :destroy_user_media
 
-  private 
+  private
 
-  def destroy_user_media 
+  def destroy_user_media
     user_media.destroy
   end
 end
