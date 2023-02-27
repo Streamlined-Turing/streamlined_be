@@ -127,12 +127,12 @@ RSpec.describe 'Users API' do
   describe 'deleting a user' do
     it 'destroys the user and all associated resources' do
       user = create(:user)
-      want_to_watch = user.lists.create(name: "want to watch")
-      currently_watching = user.lists.create(name: "currently watching")
-      watched = user.lists.create(name: "watched")
-      user_media1 = UserMedia.create(media_id: 1, user_rating: nil , user_review: "")
-      user_media2 = UserMedia.create(media_id: 2, user_rating: nil, user_review: "")
-      user_media3 = UserMedia.create(media_id: 3, user_rating: 1, user_review: "DNF")
+      want_to_watch = user.lists.create(name: 'want to watch')
+      currently_watching = user.lists.create(name: 'currently watching')
+      watched = user.lists.create(name: 'watched')
+      user_media1 = UserMedia.create(media_id: 1, user_rating: nil , user_review: '')
+      user_media2 = UserMedia.create(media_id: 2, user_rating: nil, user_review: '')
+      user_media3 = UserMedia.create(media_id: 3, user_rating: 1, user_review: 'DNF')
       media_list1 = want_to_watch.media_lists.create(user_media_id: user_media1.id)
       media_list2 = currently_watching.media_lists.create(user_media_id: user_media2.id)
       media_list3 = watched.media_lists.create(user_media_id: user_media3.id)
@@ -147,15 +147,14 @@ RSpec.describe 'Users API' do
       expect(MediaList.all).to eq([])
     end
 
-    it 'returns an error when a user that does not exist is deleted' do 
-
-      delete "/api/v1/users/1"
+    it 'returns an error when a user that does not exist is deleted' do
+      delete '/api/v1/users/1'
 
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
-      expect(result[:message]).to eq("User with id 1 not found")
+      expect(result[:message]).to eq('User with id 1 not found')
     end
   end
 end

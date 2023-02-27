@@ -1,4 +1,4 @@
-class TrendingMedia 
+class TrendingMedia
   attr_reader :id,
               :title,
               :poster_path,

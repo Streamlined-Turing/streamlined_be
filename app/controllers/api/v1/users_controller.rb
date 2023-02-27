@@ -23,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
       User.destroy(params[:id])
       render status: :no_content
     rescue StandardError => e
-      render json: {message: "User with id #{params[:id]} not found"}, status: 404 
+      render json: {message: "User with id #{params[:id]} not found"}, status: 404
     end
   end
 

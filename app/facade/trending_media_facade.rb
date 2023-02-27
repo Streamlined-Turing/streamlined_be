@@ -1,7 +1,7 @@
-class TrendingMediaFacade 
+class TrendingMediaFacade
 
   def self.details
-    media = TrendingMediaService.details 
+    media = TrendingMediaService.details
     media = media[:results].select do |media|
       media[:media_type] == 'movie' || 'tv'
     end

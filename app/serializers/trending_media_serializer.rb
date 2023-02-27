@@ -1,5 +1,5 @@
-class TrendingMediaSerializer 
-  include JSONAPI::Serializer 
+class TrendingMediaSerializer
+  include JSONAPI::Serializer
 
   attributes :id,
              :title,
