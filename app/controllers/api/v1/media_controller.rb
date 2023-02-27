@@ -14,7 +14,16 @@ class Api::V1::MediaController < ApplicationController
   end
 
   def index
-    results = MediaFacade.search(params[:q])
-    render json: SearchResultSerializer.new(results)
+    if params[:q].present?
+      results = MediaFacade.search(params[:q])
+      render json: SearchResultSerializer.new(results)
+    else
+      error = {
+        success: false,
+        statusCode: 400,
+        statusMessage: 'Must pass a value to query.'
+      }
+      render json: error, status: :bad_request
+    end
   end
 end
