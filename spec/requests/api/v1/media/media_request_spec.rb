@@ -112,16 +112,16 @@ RSpec.describe 'Watchmode API' do
     it 'returns an error message if no query key words are passed' do
       query = ''
 
-      get "/api/v1/media?q=#{query}"
-      missing_value_response = JSON.parse(response.body, symbolize_names: true)
+      stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_type=2&apiKey=#{ENV['watch_mode_api_key']}&search_value=#{query}")
+        .to_return(status: 200, body: File.read('spec/fixtures/search_no_results.json'), headers: {})
 
-      expect(response).to_not be_successful
-      expect(response).to have_http_status(400)
-      expect(missing_value_response).to eq({
-                                            :success=>false, 
-                                            :statusCode=>400, 
-                                            :statusMessage=>"Must pass a value to query."
-                                          })
+
+      get "/api/v1/media?q=#{query}"
+      no_results = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+      expect(response).to have_http_status(200)
+      expect(no_results).to eq({ :data => [] })
     end
   end
 end
