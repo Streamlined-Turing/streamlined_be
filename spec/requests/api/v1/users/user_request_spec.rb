@@ -146,5 +146,15 @@ RSpec.describe 'Users API' do
       expect(UserMedia.all).to eq([])
       expect(MediaList.all).to eq([])
     end
+
+    it 'returns an error when a user that does not exist is deleted' do 
+
+      delete "/api/v1/users/1"
+
+      result = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+    end
   end
 end
