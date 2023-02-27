@@ -1,7 +1,7 @@
 class MediaList < ApplicationRecord
   belongs_to :list
   belongs_to :user_media
-  #Might need to add optional: true next to :user_media in the future
+  #TODO Might need to add optional: true next to :user_media in the future
   #so that media_list can be created without a user_media_id. 
   has_one :user, through: :list
 
