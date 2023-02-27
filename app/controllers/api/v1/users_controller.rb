@@ -19,8 +19,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    User.destroy(params[:id])
-    render status: :no_content
+    begin
+      User.destroy(params[:id])
+      render status: :no_content
+    rescue StandardError => e
+      render json: {message: "User with id #{params[:id]} not found"}, status: 404 
+    end
   end
 
   private

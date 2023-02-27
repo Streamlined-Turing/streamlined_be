@@ -155,6 +155,7 @@ RSpec.describe 'Users API' do
 
       expect(response).to_not be_successful
       expect(response.status).to eq(404)
+      expect(result[:message]).to eq("User with id 1 not found")
     end
   end
 end
