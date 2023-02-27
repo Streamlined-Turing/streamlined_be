@@ -13,4 +13,12 @@ RSpec.describe User do
     it { should validate_presence_of :picture }
     it { should validate_presence_of :name }
   end
+
+  describe '#create_default_lists' do
+    it 'creates the 3 default lists for the user after a user is validated' do
+      user = create(:user)
+
+      expect(user.lists.count).to eq(3)
+    end
+  end
 end
