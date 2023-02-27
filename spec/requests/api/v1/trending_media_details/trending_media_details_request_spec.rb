@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'MovieDB API' do 
   describe 'trending media details request' do 
     it 'receives the days top 3 trending media details' do 
-      stub_request(:get, "https://api.themoviedb.org/trending/all/day?api_key=#{ENV["moviedb_api_key"]}")
+      stub_request(:get, "https://api.themoviedb.org/3/trending/all/day?api_key=#{ENV["moviedb_api_key"]}")
         .to_return(status: 200, body: File.read('spec/fixtures/top_trending_media.json'), headers: {})
 
       get "/api/v1/trending_media"
