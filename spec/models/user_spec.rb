@@ -19,6 +19,9 @@ RSpec.describe User do
       user = create(:user)
 
       expect(user.lists.count).to eq(3)
+      expect(user.lists.first.name).to eq('Want to Watch')
+      expect(user.lists.second.name).to eq('Currently Watching')
+      expect(user.lists.third.name).to eq('Watched')
     end
   end
 end
