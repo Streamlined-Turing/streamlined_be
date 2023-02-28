@@ -1,0 +1,99 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.watchmode.com/v1/autocomplete-search/?apiKey=<watch_mode_api_key>&search_field=name&search_type=2&search_value=everything
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 28 Feb 2023 18:26:49 GMT
+      Server:
+      - Apache/2.4.54 (Ubuntu)
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      X-Ratelimit-Limit:
+      - '120'
+      X-Ratelimit-Remaining:
+      - '117'
+      Retry-After:
+      - '11'
+      X-Account-Quota:
+      - '1000'
+      X-Account-Quota-Used:
+      - '40'
+      Vary:
+      - Accept-Encoding
+      Upgrade:
+      - h2,h2c
+      Connection:
+      - Upgrade
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"results":[{"name":"Everything Everywhere All at Once","relevance":250,"type":"movie","id":1516721,"year":2022,"result_type":"title","tmdb_id":545611,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01516721_poster_w185.jpg"},{"name":"Everything,
+        Everything","relevance":169.39,"type":"movie","id":1126597,"year":2017,"result_type":"title","tmdb_id":417678,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01126597_poster_w185.jpg"},{"name":"To
+        Wong Foo, Thanks for Everything! Julie Newmar","relevance":167.82,"type":"movie","id":1435331,"year":1995,"result_type":"title","tmdb_id":9090,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01435331_poster_w185.jpg"},{"name":"Everything
+        You Always Wanted to Know About Sex *But Were Afraid to Ask","relevance":167.74,"type":"movie","id":1126554,"year":1972,"result_type":"title","tmdb_id":11624,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01126554_poster_w185.jpg"},{"name":"Hello,
+        Goodbye, and Everything in Between","relevance":163.86,"type":"movie","id":1686838,"year":2022,"result_type":"title","tmdb_id":745376,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01686838_poster_w185.jpg"},{"name":"Everything
+        Is Illuminated","relevance":129.61,"type":"movie","id":1126513,"year":2005,"result_type":"title","tmdb_id":340,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01126513_poster_w185.jpg"},{"name":"Everything
+        Sucks!","relevance":129.35,"type":"tv_series","id":339204,"year":2018,"result_type":"title","tmdb_id":76438,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/0339204_poster_w185.jpg"},{"name":"Everything
+        Must Go","relevance":128.34,"type":"movie","id":1126531,"year":2011,"result_type":"title","tmdb_id":45658,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01126531_poster_w185.jpg"},{"name":"Everybody\u2019s
+        Everything","relevance":127.99,"type":"movie","id":1561344,"year":2019,"result_type":"title","tmdb_id":576712,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01561344_poster_w185.jpg"},{"name":"Everything''s
+        Gonna Be Great","relevance":127.92,"type":"movie","id":1126584,"year":1998,"result_type":"title","tmdb_id":81549,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01126584_poster_w185.jpg"},{"name":"Everything
+        or Nothing","relevance":125.94,"type":"movie","id":1126574,"year":2012,"result_type":"title","tmdb_id":135921,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01126574_poster_w185.jpg"},{"name":"Everything
+        Went Fine","relevance":123.99,"type":"movie","id":1628413,"year":2021,"result_type":"title","tmdb_id":735726,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01628413_poster_w185.jpg"},{"name":"Everything
+        You Want","relevance":123.8,"type":"movie","id":1443138,"year":2017,"result_type":"title","tmdb_id":457601,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01443138_poster_w185.jpg"},{"name":"Z:
+        The Beginning of Everything","relevance":123.44,"type":"tv_series","id":3147187,"year":2015,"result_type":"title","tmdb_id":64506,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03147187_poster_w185.jpg"},{"name":"Everything
+        Happens to Me","relevance":123.15,"type":"movie","id":174490,"year":1980,"result_type":"title","tmdb_id":11039,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/0174490_poster_w185.jpg"},{"name":"Diablo:
+        The Utimate Race","relevance":122.9,"type":"movie","id":1529806,"year":2019,"result_type":"title","tmdb_id":568637,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01529806_poster_w185.jpg"},{"name":"Everything
+        Calls for Salvation","relevance":120.9,"type":"tv_series","id":3187566,"year":2022,"result_type":"title","tmdb_id":134057,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03187566_poster_w185.jpg"},{"name":"Everything''s
+        Gone Wrong!","relevance":119.55,"type":"movie","id":1435806,"year":2018,"result_type":"title","tmdb_id":509421,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01435806_poster_w185.jpg"},{"name":"Everything
+        Starts With Love","relevance":97.06,"type":"short_film","id":2757541,"year":2023,"result_type":"title","tmdb_id":1090006,"tmdb_type":"movie","image_url":null},{"name":"Everything
+        About Mustafa","relevance":96.96,"type":"movie","id":1126473,"year":2004,"result_type":"title","tmdb_id":56655,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01126473_poster_w185.jpg"},{"name":"Everything
+        Will Be Ok","relevance":96.69,"type":"short_film","id":2166686,"year":2006,"result_type":"title","tmdb_id":32532,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/02166686_poster_w185.jpg"},{"name":"Everything
+        Is Copy","relevance":95.52,"type":"movie","id":1126510,"year":2015,"result_type":"title","tmdb_id":356325,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01126510_poster_w185.jpg"},{"name":"Everything
+        Is Love","relevance":95.23,"type":"movie","id":1163508,"year":2016,"result_type":"title","tmdb_id":442392,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01163508_poster_w185.jpg"},{"name":"A
+        Birder''s Guide to Everything","relevance":95.06,"type":"movie","id":15572,"year":2013,"result_type":"title","tmdb_id":174326,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/015572_poster_w185.jpg"},{"name":"Everything''s
+        Rosie","relevance":93.99,"type":"tv_series","id":3168965,"year":2010,"result_type":"title","tmdb_id":73573,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03168965_poster_w185.jpg"},{"name":"Little
+        Richard: I Am Everything","relevance":93.75,"type":"movie","id":1698835,"year":2023,"result_type":"title","tmdb_id":1053718,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01698835_poster_w185.jpg"},{"name":"Everything''s
+        Gonna Be Okay","relevance":93.33,"type":"tv_series","id":4145512,"year":2020,"result_type":"title","tmdb_id":91980,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/04145512_poster_w185.jpg"},{"name":"Everything
+        Everything Nothing Nothing","relevance":92.78,"type":"movie","id":1443142,"year":2012,"result_type":"title","tmdb_id":161545,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01443142_poster_w185.jpg"},{"name":"Everything
+        I Know About Love","relevance":92.66,"type":"tv_series","id":3185626,"year":2022,"result_type":"title","tmdb_id":202432,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03185626_poster_w185.jpg"},{"name":"Everything
+        and Nothing","relevance":82.27,"type":"tv_miniseries","id":339210,"year":2011,"result_type":"title","tmdb_id":67473,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/0339210_poster_w185.jpg"},{"name":"Everything''s
+        Fine: A Panic Attack in D Major","relevance":82.11,"type":"short_film","id":2752294,"year":2018,"result_type":"title","tmdb_id":1057766,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/02752294_poster_w185.jpg"},{"name":"Everything
+        Is Samuel L. Jackson''s Fault","relevance":82.11,"type":"movie","id":2166630,"year":2013,"result_type":"title","tmdb_id":376980,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/02166630_poster_w185.jpg"},{"name":"Everything
+        Wrong and Nowhere to Go","relevance":81.26,"type":"short_film","id":2746798,"year":2022,"result_type":"title","tmdb_id":1018271,"tmdb_type":"movie","image_url":null},{"name":"Everything
+        Else","relevance":81.15,"type":"tv_series","id":3179675,"year":2021,"result_type":"title","tmdb_id":114819,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03179675_poster_w185.jpg"},{"name":"Everything
+        Will Be Fine","relevance":81.15,"type":"tv_series","id":3176620,"year":2021,"result_type":"title","tmdb_id":129675,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03176620_poster_w185.jpg"},{"name":"The
+        Beginning and End of Everything","relevance":77.68,"type":"short_film","id":2739921,"year":2022,"result_type":"title","tmdb_id":979423,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/02739921_poster_w185.jpg"},{"name":"Alles
+        \u00fcber Martin Suter. Ausser die Wahrheit.","relevance":77.68,"type":"movie","id":1687443,"year":2022,"result_type":"title","tmdb_id":997668,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/01687443_poster_w185.jpg"},{"name":"Everything''s
+        Gonna Be All White","relevance":75.26,"type":"tv_miniseries","id":3182048,"year":2022,"result_type":"title","tmdb_id":157312,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03182048_poster_w185.jpg"},{"name":"Everything''s
+        Trash","relevance":72.3,"type":"tv_series","id":3185081,"year":2022,"result_type":"title","tmdb_id":135312,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03185081_poster_w185.jpg"},{"name":"Everything
+        Wrong with...","relevance":70.68,"type":"tv_series","id":3192790,"year":2012,"result_type":"title","tmdb_id":106776,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03192790_poster_w185.jpg"},{"name":"Everything''s
+        Better than a Hooker","relevance":66.45,"type":"tv_movie","id":436799,"year":2018,"result_type":"title","tmdb_id":503649,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/0436799_poster_w185.jpg"},{"name":"Everything
+        Not Saved","relevance":66.45,"type":"tv_movie","id":4157929,"year":2018,"result_type":"title","tmdb_id":980458,"tmdb_type":"movie","image_url":null},{"name":"Everything
+        Is Connected: George Eliot''s Life","relevance":66.45,"type":"tv_movie","id":4157831,"year":2019,"result_type":"title","tmdb_id":648674,"tmdb_type":"movie","image_url":"https:\/\/cdn.watchmode.com\/posters\/04157831_poster_w185.jpg"},{"name":"Everything''s
+        Relative","relevance":44.8,"type":"tv_series","id":3174078,"year":1987,"result_type":"title","tmdb_id":15040,"tmdb_type":"tv","image_url":"https:\/\/cdn.watchmode.com\/posters\/03174078_poster_w185.jpg"},{"name":"Smile:
+        Forget Everything You Knew... A Debut Concert in London","relevance":32.33,"type":"tv_special","id":545026,"year":2022,"result_type":"title","tmdb_id":987764,"tmdb_type":"movie","image_url":null}]}'
+  recorded_at: Tue, 28 Feb 2023 18:26:49 GMT
+recorded_with: VCR 6.1.0
