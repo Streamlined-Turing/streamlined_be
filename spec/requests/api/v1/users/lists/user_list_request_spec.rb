@@ -75,3 +75,24 @@ RSpec.describe 'User Lists API' do
         expect(attributes[:trailer]).to be_a(String)
       end
     end
+
+    it 'returns error if list name does not match any of the users lists' do
+      user = create(:user)
+      query = 'fake list'
+      get "/api/v1/users/#{user.id}/lists?list=#{query}"
+      expect(response).to have_http_status(:not_found)
+  
+      error_json = JSON.parse(response.body, symbolize_names:true)
+      expect(error_json[:errors].first[:detail]).to eq("Couldn't find List with the name: 'fake list'")
+    end
+
+    it 'returns error if user does not exist' do
+      query = 'currently watching'
+      user_id = '12346134613461234'
+      get "/api/v1/users/#{user_id}/lists?list=#{query}"
+      expect(response).to have_http_status(:not_found)
+      error_json = JSON.parse(response.body, symbolize_names:true)
+      expect(error_json[:errors].first[:detail]).to eq("Couldn't find User with 'id'=12346134613461234")
+    end
+  end
+end
