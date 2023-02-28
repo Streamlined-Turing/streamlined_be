@@ -12,11 +12,11 @@ jobs: # a collection of steps
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: postgres
-          RAILS_ENV: test
+          RAILS_ENV: development
       - image: circleci/postgres:11 # database image
         environment: # environment variables for database, it is kind of obvious but it is important that they match with your test config in database.yml
           POSTGRES_USER: postgres
-          POSTGRES_DB: streamlined_be_test
+          POSTGRES_DB: streamlined_be_development
           POSTGRES_HOST_AUTH_METHOD: trust
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
