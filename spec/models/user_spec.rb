@@ -24,4 +24,26 @@ RSpec.describe User do
       expect(user.lists.third.name).to eq('Watched')
     end
   end
+
+  describe '#media_ids_for' do
+    it 'returns an array of media ids given a list name for a particular user' do
+      user = create(:user)
+      
+      currently_watching_list = user.lists.find_by("name ILIKE ?", "currently watching")
+      want_to_watch_list = user.lists.find_by("name ILIKE ?", "want to watch")
+      
+      game_of_thrones = create(:user_media, media_id: 345534)
+      breaking_bad = create(:user_media, media_id: 3173903)
+      test_media = create(:user_media, media_id: 1234)
+      
+      MediaList.create(list: currently_watching_list, user_media: game_of_thrones)
+      MediaList.create(list: want_to_watch_list, user_media: breaking_bad)
+      MediaList.create(list: want_to_watch_list, user_media: test_media)
+
+      expect(user.media_ids_for("currently watching")).to eq([345534])
+      expect(user.media_ids_for("want to watch")). to eq([3173903, 1234])
+      expect(user.media_ids_for("watched")).to eq([])
+    end
+  end
+
 end
