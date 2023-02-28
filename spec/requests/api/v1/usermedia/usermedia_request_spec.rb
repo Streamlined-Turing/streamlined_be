@@ -16,19 +16,18 @@ RSpec.describe 'Edit Media List API' do
 
       expect(user.want_to_watch).to eq [user_media]
     end
-  end
 
-  describe 'post user/user_id/media/media_id' do
     it 'can add a new piece of media to a user list' do
       user = create(:user) 
 
       media_id = 3173903 
-      post "/api/v1/users/#{user.id}/media/#{media_id}/?list=Want to Watch"
+      patch "/api/v1/users/#{user.id}/media/#{media_id}/?list=Want to Watch"
 
       expect(response).to be_successful
-      expect(response.status).to eq 201
+      expect(response.status).to eq 204
 
-      expect(user.want_to_watch).to eq [user_media]
+      expect(user.want_to_watch).to eq [user.user_medias.last]
+      expect(user.user_medias.last.list.name).to eq "Want to Watch"
     end
   end
 end
