@@ -52,5 +52,5 @@ ActiveRecord::Schema.define(version: 2023_02_23_232745) do
 
   add_foreign_key "lists", "users"
   add_foreign_key "media_lists", "lists"
-  add_foreign_key "media_lists", "user_media", column: "user_media_id"
+  add_foreign_key "media_lists", "user_media"
 end
