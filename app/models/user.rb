@@ -7,6 +7,18 @@ class User < ApplicationRecord
 
   after_create :create_default_lists
 
+  def media_ids_for(list_name)
+    list_medias = user_medias.where('lists.name ILIKE ?', list_name).pluck(:media_id)
+  end
+
+  def has_list_name?(list_name)
+    if lists.find_by('name ILIKE ?', list_name)
+      true
+    else 
+      false
+    end
+  end
+
   private
 
   def create_default_lists
