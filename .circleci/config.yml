@@ -49,5 +49,5 @@ jobs: # a collection of steps
 workflows:
   build-test:
     jobs:
-      - build-and-test
-        context: back-end
+      - build-and-test:
+          context: back-end
