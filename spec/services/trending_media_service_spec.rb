@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TrendingMediaService do
-  before(:each) do
-    stub_request(:get, "https://api.themoviedb.org/3/trending/all/day?api_key=#{ENV["moviedb_api_key"]}")
-      .to_return(status: 200, body: File.read('spec/fixtures/top_trending_media.json'), headers: {})
-  end
+RSpec.describe TrendingMediaService, :vcr do
 
   describe '.details' do
     it 'returns a response with all trending media details' do

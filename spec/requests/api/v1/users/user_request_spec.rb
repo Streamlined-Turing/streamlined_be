@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Users API' do
+RSpec.describe 'Users API', :vcr do
   describe 'create a user resource' do
     it 'can create a new user in the database' do
       user_params = {
@@ -56,7 +56,7 @@ RSpec.describe 'Users API' do
       expect(existing_user[:data]).to have_key(:type)
       expect(existing_user[:data]).to have_key(:attributes)
       expect(existing_user[:data][:id].to_i).to eq(user.id)
-      expect(existing_user[:data][:attributes].keys.sort).to eq([:sub, :username, :email, :name, :picture].sort)
+      expect(existing_user[:data][:attributes].keys.sort).to eq(%i[sub username email name picture].sort)
       expect(existing_user[:data][:attributes][:sub]).to eq(user.sub)
       expect(existing_user[:data][:attributes][:username]).to eq(user.username)
       expect(existing_user[:data][:attributes][:email]).to eq(user.email)
@@ -130,7 +130,7 @@ RSpec.describe 'Users API' do
       want_to_watch = user.lists.create(name: 'want to watch')
       currently_watching = user.lists.create(name: 'currently watching')
       watched = user.lists.create(name: 'watched')
-      user_media1 = UserMedia.create(media_id: 1, user_rating: nil , user_review: '')
+      user_media1 = UserMedia.create(media_id: 1, user_rating: nil, user_review: '')
       user_media2 = UserMedia.create(media_id: 2, user_rating: nil, user_review: '')
       user_media3 = UserMedia.create(media_id: 3, user_rating: 1, user_review: 'DNF')
       media_list1 = want_to_watch.media_lists.create(user_media_id: user_media1.id)

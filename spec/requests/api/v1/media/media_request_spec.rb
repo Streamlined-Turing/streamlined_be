@@ -1,15 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'Watchmode API' do
+RSpec.describe 'Watchmode API', :vcr do
   describe 'get media/id' do
     it 'sends media details' do
-      stub_request(:get, "https://api.watchmode.com/v1/title/3173903/details?apiKey=#{ENV['watch_mode_api_key']}&append_to_response=sources")
-        .to_return(status: 200, body: File.read('spec/fixtures/breaking_bad_details_3173903.json'), headers: {})
+      expected_keys = %i[id title audience_score rating media_type description genres release_year
+                         runtime language sub_services poster trailer imdb_id tmdb_id tmdb_type]
 
-      expected_keys = [:id, :title, :audience_score, :rating, :media_type, :description, :genres, :release_year,
-                       :runtime, :language, :sub_services, :poster, :trailer, :imdb_id, :tmdb_id, :tmdb_type]
-
-      show_id = 3173903
+      show_id = 3_173_903
       get "/api/v1/media/#{show_id}"
 
       media_data = JSON.parse(response.body, symbolize_names: true)
@@ -19,7 +16,7 @@ RSpec.describe 'Watchmode API' do
       expect(media_data).to be_a Hash
       expect(media_data.keys).to eq([:data])
       expect(media_data[:data]).to be_a Hash
-      expect(media_data[:data].keys.sort).to eq([:type, :id, :attributes].sort)
+      expect(media_data[:data].keys.sort).to eq(%i[type id attributes].sort)
       expect(media_data[:data][:id]).to be_a String
       expect(media_data[:data][:type]).to eq('media')
       expect(media_data[:data][:attributes]).to be_a Hash
@@ -46,10 +43,7 @@ RSpec.describe 'Watchmode API' do
     end
 
     it 'returns an error message when an incorrect id is passed' do
-      stub_request(:get, "https://api.watchmode.com/v1/title/show_id/details?apiKey=#{ENV['watch_mode_api_key']}&append_to_response=sources")
-        .to_return(status: 404, body: File.read('spec/fixtures/media_details_404.json'), headers: {})
-
-      show_id = 3173903
+      show_id = 3_173_903
       get '/api/v1/media/show_id'
 
       media_data = JSON.parse(response.body, symbolize_names: true)
@@ -67,10 +61,8 @@ RSpec.describe 'Watchmode API' do
   describe 'get media?q=' do
     it 'returns an array of media with title matching query param' do
       query = 'everything'
-      stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_value=#{query}&search_type=2&apiKey=#{ENV['watch_mode_api_key']}")
-        .to_return(status: 200, body: File.read('spec/fixtures/media_search_everything.json'), headers: {})
 
-      expected_keys = [:id, :title, :media_type, :release_year, :tmdb_id, :tmdb_type, :poster]
+      expected_keys = %i[id title media_type release_year tmdb_id tmdb_type poster]
 
       get "/api/v1/media?q=#{query}"
 
@@ -82,7 +74,7 @@ RSpec.describe 'Watchmode API' do
       expect(search_result[:data]).to be_a Array
       search_result[:data].first(15).each do |media_data|
         expect(media_data).to be_a Hash
-        expect(media_data.keys.sort).to eq([:id, :type, :attributes].sort)
+        expect(media_data.keys.sort).to eq(%i[id type attributes].sort)
         expect(media_data[:id]).to be_a String
         expect(media_data[:type]).to eq('search_result')
         expect(media_data[:attributes]).to be_a Hash
@@ -99,29 +91,23 @@ RSpec.describe 'Watchmode API' do
 
     it 'returns hash with data and an empty array if no matches for query' do
       query = 'tyranorsauriouesbadfasdfg'
-      stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_value=#{query}&search_type=2&apiKey=#{ENV['watch_mode_api_key']}")
-        .to_return(status: 200, body: File.read('spec/fixtures/search_no_results.json'), headers: {})
 
       get "/api/v1/media?q=#{query}"
       no_result = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
-      expect(no_result).to eq({ :data => [] })
+      expect(no_result).to eq({ data: [] })
     end
 
     it 'returns an error message if no query key words are passed' do
       query = ''
-
-      stub_request(:get, "https://api.watchmode.com/v1/autocomplete-search/?search_field=name&search_type=2&apiKey=#{ENV['watch_mode_api_key']}&search_value=#{query}")
-        .to_return(status: 200, body: File.read('spec/fixtures/search_no_results.json'), headers: {})
-
 
       get "/api/v1/media?q=#{query}"
       no_results = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
       expect(response).to have_http_status(200)
-      expect(no_results).to eq({ :data => [] })
+      expect(no_results).to eq({ data: [] })
     end
   end
 end
