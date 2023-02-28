@@ -1,0 +1,88 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.watchmode.com/v1/title/3173903/details?apiKey=<watch_mode_api_key>&append_to_response=sources
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 28 Feb 2023 18:02:55 GMT
+      Server:
+      - Apache/2.4.54 (Ubuntu)
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, DELETE, OPTIONS
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      X-Ratelimit-Limit:
+      - '120'
+      X-Ratelimit-Remaining:
+      - '120'
+      Retry-After:
+      - '5'
+      X-Account-Quota:
+      - '1000'
+      X-Account-Quota-Used:
+      - '20'
+      Vary:
+      - Accept-Encoding
+      Upgrade:
+      - h2,h2c
+      Connection:
+      - Upgrade
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":3173903,"title":"Breaking Bad","original_title":"Breaking Bad","plot_overview":"When
+        Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III
+        cancer and given a prognosis of only two years left to live. He becomes filled
+        with a sense of fearlessness and an unrelenting desire to secure his family''s
+        financial future at any cost as he enters the dangerous world of drugs and
+        crime.","type":"tv_series","runtime_minutes":45,"year":2008,"end_year":2013,"release_date":"2008-01-20","imdb_id":"tt0903747","tmdb_id":1396,"tmdb_type":"tv","genres":null,"genre_names":[],"user_rating":9.3,"critic_score":85,"us_rating":"TV-MA","poster":"https:\/\/cdn.watchmode.com\/posters\/03173903_poster_w185.jpg","backdrop":"https:\/\/cdn.watchmode.com\/backdrops\/03173903_bd_w780.jpg","original_language":"en","similar_titles":[3131293,383653,3186135,3129354,313542,3124749,340865,3109684,350372],"networks":[8],"network_names":["AMC"],"relevance_percentile":98.8,"trailer":"https:\/\/www.youtube.com\/watch?v=5NpEA2yaWVQ","trailer_thumbnail":"https:\/\/cdn.watchmode.com\/video_thumbnails\/536028_pthumbnail_320.jpg","sources":[{"source_id":349,"name":"iTunes","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/itunes.apple.com\/us\/tv-season\/felina\/id665386598?i=717897170&at=10laHb","format":"SD","price":1.99,"seasons":null,"episodes":null},{"source_id":349,"name":"iTunes","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/itunes.apple.com\/us\/tv-season\/felina\/id665386598?i=717897170&at=10laHb","format":"HD","price":2.99,"seasons":null,"episodes":null},{"source_id":140,"name":"Google
+        Play","type":"buy","region":"US","ios_url":"Deeplinks available for paid plans
+        only.","android_url":"Deeplinks available for paid plans only.","web_url":"https:\/\/play.google.com\/store\/tv\/show?id=L2wfgMDGiBk&cdid=tvseason-QloudPiQicc&gdid=tvepisode-9VYSQkZP4Gc&PAffiliateID=1101l32vn","format":"HD","price":2.99,"seasons":null,"episodes":null},{"source_id":140,"name":"Google
+        Play","type":"buy","region":"US","ios_url":"Deeplinks available for paid plans
+        only.","android_url":"Deeplinks available for paid plans only.","web_url":"https:\/\/play.google.com\/store\/tv\/show?id=L2wfgMDGiBk&cdid=tvseason-QloudPiQicc&gdid=tvepisode-9VYSQkZP4Gc&PAffiliateID=1101l32vn","format":"SD","price":1.99,"seasons":null,"episodes":null},{"source_id":307,"name":"VUDU","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/www.vudu.com\/content\/movies\/details\/content\/460653","format":"HD","price":2.99,"seasons":null,"episodes":null},{"source_id":307,"name":"VUDU","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/www.vudu.com\/content\/movies\/details\/content\/460653","format":"SD","price":1.99,"seasons":null,"episodes":null},{"source_id":344,"name":"YouTube","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/www.youtube.com\/watch?v=9VYSQkZP4Gc","format":"HD","price":2.99,"seasons":null,"episodes":null},{"source_id":344,"name":"YouTube","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/www.youtube.com\/watch?v=9VYSQkZP4Gc","format":"SD","price":1.99,"seasons":null,"episodes":null},{"source_id":24,"name":"Amazon","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/www.amazon.com\/gp\/video\/detail\/amzn1.dv.gti.9aa9f77a-dc91-b172-9a35-b9a6f34728b8?tag=","format":"SD","price":1.99,"seasons":null,"episodes":null},{"source_id":24,"name":"Amazon","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/www.amazon.com\/gp\/video\/detail\/amzn1.dv.gti.9aa9f77a-dc91-b172-9a35-b9a6f34728b8?tag=","format":"4K","price":3.99,"seasons":null,"episodes":null},{"source_id":24,"name":"Amazon","type":"buy","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/www.amazon.com\/gp\/video\/detail\/amzn1.dv.gti.9aa9f77a-dc91-b172-9a35-b9a6f34728b8?tag=","format":"HD","price":2.99,"seasons":null,"episodes":null},{"source_id":398,"name":"Microsoft
+        Store","type":"buy","region":"US","ios_url":"Deeplinks available for paid
+        plans only.","android_url":"Deeplinks available for paid plans only.","web_url":"https:\/\/www.microsoft.com\/en-us\/p\/season-5\/8d6kgwzlcwj3","format":"SD","price":1.99,"seasons":null,"episodes":null},{"source_id":398,"name":"Microsoft
+        Store","type":"buy","region":"US","ios_url":"Deeplinks available for paid
+        plans only.","android_url":"Deeplinks available for paid plans only.","web_url":"https:\/\/www.microsoft.com\/en-us\/p\/season-5\/8d6kgwzlcwj3","format":"HD","price":2.99,"seasons":null,"episodes":null},{"source_id":203,"name":"Netflix","type":"sub","region":"US","ios_url":"Deeplinks
+        available for paid plans only.","android_url":"Deeplinks available for paid
+        plans only.","web_url":"https:\/\/www.netflix.com\/watch\/70236428","format":"4K","price":null,"seasons":null,"episodes":null}]}'
+  recorded_at: Tue, 28 Feb 2023 18:02:55 GMT
+recorded_with: VCR 6.1.0
