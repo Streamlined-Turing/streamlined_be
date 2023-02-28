@@ -46,4 +46,12 @@ RSpec.describe User do
     end
   end
 
+  describe '#has_list_name?' do
+    it 'checks if a list record exists given a case insensitive name or gives an error' do
+      user = create(:user)
+
+      expect(user.has_list_name?("currently WatcHing")).to be true
+      expect(user.has_list_name?("fake list")).to be false
+    end
+  end
 end
