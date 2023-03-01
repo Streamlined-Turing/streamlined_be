@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   after_create :create_default_lists
 
+
   def media_ids_for(list_name)
     list_medias = user_medias.where('lists.name ILIKE ?', list_name).pluck(:media_id)
   end
@@ -17,6 +18,18 @@ class User < ApplicationRecord
     else 
       false
     end
+  end
+
+  def currently_watching
+    lists.find_by('name = ?', "Currently Watching").user_medias
+  end
+
+  def want_to_watch
+    lists.find_by('name = ?', "Want to Watch").user_medias
+  end
+
+  def watched
+    lists.find_by('name = ?', "Watched").user_medias
   end
 
   private

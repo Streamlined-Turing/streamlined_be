@@ -54,4 +54,33 @@ RSpec.describe User do
       expect(user.has_list_name?("fake list")).to be false
     end
   end
+
+  describe 'list_methods' do
+    it 'returns a list of user_media objects associated with the currently watching list' do
+      user = create(:user) 
+      list = user.lists.find_by(name: "Want to Watch")
+      user_media = create(:user_media, media_id: 3173903) 
+      media_list = MediaList.create(list: list, user_media: user_media) 
+
+      expect(user.want_to_watch).to eq [user_media]
+    end
+
+    it 'returns a list of user_media objects associated with the currently watching list' do
+      user = create(:user) 
+      list = user.lists.find_by(name: "Currently Watching")
+      user_media = create(:user_media, media_id: 3173903) 
+      media_list = MediaList.create(list: list, user_media: user_media) 
+
+      expect(user.currently_watching).to eq [user_media]
+    end
+
+    it 'returns a list of user_media objects associated with the currently watching list' do
+      user = create(:user) 
+      list = user.lists.find_by(name: "Watched")
+      user_media = create(:user_media, media_id: 3173903) 
+      media_list = MediaList.create(list: list, user_media: user_media) 
+
+      expect(user.watched).to eq [user_media]
+    end
+  end
 end
