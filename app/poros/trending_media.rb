@@ -7,7 +7,7 @@ class TrendingMedia
 
   def initialize(media_params)
     @id             = media_params[:id]
-    @title          = media_params[:title]
+    @title          = media_params[:title] || media_params[:name]
     @poster_path    = media_params[:poster_path]
     @media_type     = media_params[:media_type]
     @vote_average   = media_params[:vote_average]
