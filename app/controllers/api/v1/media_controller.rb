@@ -1,6 +1,6 @@
 class Api::V1::MediaController < ApplicationController
   def show
-    media = MediaFacade.details(params[:id])
+    media = MediaFacade.details(params[:id], params[:user_id])
     if media
       render json: MediaSerializer.new(media), status: :ok
     else

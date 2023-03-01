@@ -4,7 +4,7 @@ RSpec.describe 'Watchmode API', :vcr do
   describe 'get media/id' do
     it 'sends media details' do
       expected_keys = %i[id title audience_score rating media_type description genres release_year
-                         runtime language sub_services poster trailer imdb_id tmdb_id tmdb_type]
+                         runtime language sub_services poster trailer imdb_id tmdb_id tmdb_type user_lists]
 
       show_id = 3_173_903
       get "/api/v1/media/#{show_id}"
@@ -40,6 +40,7 @@ RSpec.describe 'Watchmode API', :vcr do
       expect(media_data[:data][:attributes][:imdb_id]).to be_a String
       expect(media_data[:data][:attributes][:tmdb_id]).to be_a Integer
       expect(media_data[:data][:attributes][:tmdb_type]).to be_a String
+      expect(media_data[:data][:attributes][:user_lists]).to be_a String
     end
 
     it 'returns an error message when an incorrect id is passed' do
