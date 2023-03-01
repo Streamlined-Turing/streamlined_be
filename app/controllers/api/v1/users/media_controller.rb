@@ -14,6 +14,16 @@ class Api::V1::Users::MediaController < ApplicationController
       render status: :no_content
     end
   end
+
+  def destroy
+    user = User.find(params[:user_id])
+    user_media = user.user_medias.find_by(media_id: params[:id])
+    if user_media
+      user_media.destroy
+    else
+      raise ActiveRecord::RecordNotFound.new "Couldn't find UserMedia with the id: '#{params[:id]}'"
+    end
+  end
 end
 
 
