@@ -12,6 +12,19 @@ RSpec.describe MediaFacade, :vcr do
 
       expect(media_details).to be_a Media
       expect(media_details.id).to eq(@breaking_bad_id)
+      expect(media_details.user_lists).to eq('None')
+    end
+
+    it 'can optionally include data about a users lists' do
+      user = create(:user) 
+      list = user.lists.last
+      user_media = create(:user_media, media_id: 3173903) 
+      MediaList.create(list: list, user_media: user_media) 
+      media_details = MediaFacade.details(@breaking_bad_id, user.id)
+
+      expect(media_details).to be_a Media
+      expect(media_details.id).to eq(@breaking_bad_id)
+      expect(media_details.user_lists).to eq('Watched')
     end
   end
 

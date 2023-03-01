@@ -1,7 +1,7 @@
 class MediaFacade
-  def self.details(id)
-    media_data = MediaService.details(id)
-    Media.new(media_data) if media_data[:id]
+  def self.details(id, user_id = nil)
+      media_data = MediaService.details(id)
+      Media.new(media_data, user_id) if media_data[:id]
   end
 
   def self.user_list_details(user_id, list_name)

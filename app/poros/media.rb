@@ -14,9 +14,10 @@ class Media
               :imdb_id,
               :tmdb_id,
               :tmdb_type,
-              :trailer
+              :trailer,
+              :user_lists
 
-  def initialize(media_data)
+  def initialize(media_data, user_id = nil)
     @id                 = media_data[:id]
     @title              = media_data[:title] || media_data[:name]
     @audience_score     = media_data[:user_rating]
@@ -33,6 +34,7 @@ class Media
     @tmdb_id            = media_data[:tmdb_id]
     @tmdb_type          = media_data[:tmdb_type]
     @trailer            = media_data[:trailer]
+    @user_lists         = lists(user_id)
     @sub_services       = subscription_services
   end
 
@@ -43,5 +45,16 @@ class Media
       service[:type] == 'sub'
     end
     services.map { |service| service[:name] }
+  end
+
+  private
+
+  def lists(user_id)
+    user = User.find_by(id: user_id)
+    if user
+      user.user_medias.take.try(:list).name || 'None'
+    else
+      'None'
+    end
   end
 end

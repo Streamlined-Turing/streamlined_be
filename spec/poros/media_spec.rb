@@ -118,6 +118,16 @@ RSpec.describe Media do
     expect(media.trailer).to be nil
   end
 
+  it 'can be created with user list information' do
+    user = create(:user) 
+    list = user.lists.first
+    user_media = create(:user_media, media_id: 3173903) 
+    MediaList.create(list: list, user_media: user_media) 
+    media = Media.new(@heavy_media_data, user.id)
+
+    expect(media.user_lists).to eq "Want to Watch"
+  end
+
   describe '#subscription_services' do
     it 'returns the services media is available with a subscription' do
       media0 = Media.new({ :sources => [] })
