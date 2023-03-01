@@ -40,6 +40,7 @@ RSpec.describe 'Watchmode API', :vcr do
       expect(media_data[:data][:attributes][:imdb_id]).to be_a String
       expect(media_data[:data][:attributes][:tmdb_id]).to be_a Integer
       expect(media_data[:data][:attributes][:tmdb_type]).to be_a String
+      expect(media_data[:data][:attributes][:user_lists]).to be_a String
     end
 
     it 'returns an error message when an incorrect id is passed' do

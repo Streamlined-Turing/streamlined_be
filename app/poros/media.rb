@@ -52,7 +52,7 @@ class Media
   def lists(user_id)
     user = User.find_by(id: user_id)
     if user
-      user.user_medias.take.try(:list).name || 'None'
+      user.user_medias.where(media_id: self.id).take.try(:list).name || 'None'
     else
       'None'
     end

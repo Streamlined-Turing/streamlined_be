@@ -127,6 +127,19 @@ RSpec.describe Media do
 
     expect(media.user_lists).to eq "Want to Watch"
   end
+  
+  it 'only returns list information for this piece of media' do
+    user = create(:user) 
+    list = user.lists.first
+    other_list = user.lists.last
+    user_media = create(:user_media, media_id: 3173903) 
+    user_media2 = create(:user_media) 
+    MediaList.create(list: list, user_media: user_media) 
+    MediaList.create(list: other_list, user_media: user_media2) 
+    media = Media.new(@heavy_media_data, user.id)
+
+    expect(media.user_lists).to eq "Want to Watch"
+  end
 
   describe '#subscription_services' do
     it 'returns the services media is available with a subscription' do
