@@ -60,7 +60,7 @@ class Media
     end
   end
 
-  def set_rating
+  def set_rating(user_id)
     user = User.find_by(id: user_id)
     if user
       user.user_medias.where(media_id: self.id).take.try(:user_rating)
