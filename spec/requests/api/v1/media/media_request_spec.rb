@@ -4,7 +4,7 @@ RSpec.describe 'Watchmode API', :vcr do
   describe 'get media/id' do
     it 'sends media details' do
       expected_keys = %i[id title audience_score rating media_type description genres release_year
-                         runtime language sub_services poster trailer imdb_id tmdb_id tmdb_type user_lists, user_rating]
+                         runtime language sub_services poster trailer imdb_id tmdb_id tmdb_type user_lists user_rating]
 
       show_id = 3_173_903
       get "/api/v1/media/#{show_id}"
