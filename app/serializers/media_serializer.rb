@@ -17,5 +17,6 @@ class MediaSerializer
               :tmdb_type,
               :trailer,
               :user_lists,
+              :added_to_list_on,
               :user_rating
 end

@@ -16,7 +16,8 @@ class Media
               :tmdb_type,
               :trailer,
               :user_lists,
-              :user_rating
+              :user_rating,
+              :added_to_list_on
 
   def initialize(media_data, user_id = nil)
     @id                 = media_data[:id]
@@ -36,6 +37,7 @@ class Media
     @tmdb_type          = media_data[:tmdb_type]
     @trailer            = media_data[:trailer]
     @user_lists         = lists(user_id)
+    @added_to_list_on    = media_list_updated_at(user_id)
     @user_rating        = set_rating(user_id)
     @sub_services       = subscription_services
   end
@@ -64,6 +66,13 @@ class Media
     user = User.find_by(id: user_id)
     if user
       user.user_medias.where(media_id: self.id).take.try(:user_rating)
+    end
+  end
+
+  def media_list_updated_at(user_id)
+    user = User.find_by(id: user_id)
+    if user
+      user.user_medias.where(media_id: self.id).take.try(:media_list).try(:updated_at)
     end
   end
 end

@@ -141,6 +141,17 @@ RSpec.describe Media do
     expect(media.user_lists).to eq "Want to Watch"
   end
 
+  it 'has the time it was last put on a list' do
+    user = create(:user) 
+    list = user.lists.first
+    user_media = create(:user_media, media_id: 3173903) 
+    media_list = MediaList.create(list: list, user_media: user_media) 
+    updated_at = media_list.updated_at
+    media = Media.new(@heavy_media_data, user.id)
+
+    expect(media.added_to_list_on).to be_within(1.second).of updated_at
+  end
+
   it 'can be created with user rating information' do
     user = create(:user) 
     list = user.lists.first
