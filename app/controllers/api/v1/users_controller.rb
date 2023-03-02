@@ -9,9 +9,14 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
-    user.update(username: params[:username])
-    render json: UserSerializer.new(user), status: :ok
+    @errors = []
+    if verified_username?
+      user = User.find(params[:id])
+      user.update(username: params[:username])
+      render json: UserSerializer.new(user), status: :ok
+    else
+      render json: { message: @errors.join(', ') }, status: 400
+    end
   end
 
   def show
@@ -23,7 +28,7 @@ class Api::V1::UsersController < ApplicationController
       User.destroy(params[:id])
       render status: :no_content
     rescue StandardError => e
-      render json: {message: "User with id #{params[:id]} not found"}, status: 404
+      render json: { message: "User with id #{params[:id]} not found" }, status: 404
     end
   end
 
@@ -35,5 +40,27 @@ class Api::V1::UsersController < ApplicationController
                   :name,
                   :email,
                   :picture)
+  end
+
+  def verify_characters
+    if params[:username] == params[:username].gsub(/[^0-9A-Za-z_-]/, '')
+      true
+    else
+      @errors << 'Invalid characters. Only - and _ allowed for special characters'
+      false
+    end
+  end
+
+  def verify_length
+    if params[:username].length >= 6 && params[:username].length <= 36
+      true
+    else
+      @errors << 'Username must be 6 - 36 characters in length'
+      false
+    end
+  end
+
+  def verified_username?
+    verify_characters && verify_length
   end
 end
