@@ -18,7 +18,7 @@ class Api::V1::Users::MediaController < ApplicationController
       user = User.find(params[:user_id])
       user_media = user.user_medias.find_by(media_id: params[:id])
       if user_media
-        user_media.update(user_rating: params[:rating])
+        user_media.update!(user_rating: params[:rating])
       else
         list = user.lists.find_by(name: "Watched")
         user_media = UserMedia.create!(media_id: params[:id], user_rating: params[:rating])
