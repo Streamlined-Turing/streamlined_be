@@ -4,7 +4,7 @@ RSpec.describe 'Watchmode API', :vcr do
   describe 'get media/id' do
     it 'sends media details' do
       expected_keys = %i[id title audience_score rating media_type description genres release_year
-                         runtime language sub_services poster trailer imdb_id tmdb_id tmdb_type user_lists user_rating]
+                         runtime language sub_services poster trailer imdb_id tmdb_id tmdb_type user_lists user_rating added_to_list_on]
 
       show_id = 3_173_903
       get "/api/v1/media/#{show_id}"
@@ -63,7 +63,7 @@ RSpec.describe 'Watchmode API', :vcr do
     it 'returns an array of media with title matching query param' do
       query = 'everything'
 
-      expected_keys = %i[id title media_type release_year tmdb_id tmdb_type poster]
+      expected_keys = %i[id title media_type release_year tmdb_id tmdb_type poster user_lists user_rating added_to_list_on]
 
       get "/api/v1/media?q=#{query}"
 
@@ -109,6 +109,32 @@ RSpec.describe 'Watchmode API', :vcr do
       expect(response).to be_successful
       expect(response).to have_http_status(200)
       expect(no_results).to eq({ data: [] })
+    end
+  end
+
+  describe 'get media?q=<query>&user_id=' do
+    it 'returns an array of media with media list info and user rating given a user_id' do
+      query = 'everything'
+      user = create(:user)
+      user_media = create(:user_media, media_id: 1516721, user_rating: 4)
+      list = user.lists.find_by(name: "Currently Watching")
+      media_list = MediaList.create(list: list, user_media: user_media)
+      get "/api/v1/media?q=#{query}&user_id=#{user.id}"
+
+      search_result = JSON.parse(response.body, symbolize_names: true)
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+      expect(search_result).to be_a Hash
+      expect(search_result[:data]).to be_a Array
+      media_data = search_result[:data].first
+
+      expect(media_data[:attributes][:user_lists]).to be_a String
+      expect(media_data[:attributes][:user_lists]).to eq "Currently Watching"
+
+      expect(media_data[:attributes][:added_to_list_on]).to be_a String
+
+      expect(media_data[:attributes][:user_rating]).to be_a Integer
+      expect(media_data[:attributes][:user_rating]).to eq 4
     end
   end
 end
