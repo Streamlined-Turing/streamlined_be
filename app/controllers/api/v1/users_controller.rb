@@ -61,6 +61,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def verified_username?
-    verify_characters && verify_length
+    verify_characters & verify_length
   end
 end
