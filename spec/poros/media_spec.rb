@@ -149,7 +149,7 @@ RSpec.describe Media do
     updated_at = media_list.updated_at
     media = Media.new(@heavy_media_data, user.id)
 
-    expect(media.list_updated_at).to eq updated_at
+    expect(media.added_to_list_on).to eq updated_at
   end
 
   it 'can be created with user rating information' do

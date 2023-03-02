@@ -15,7 +15,7 @@ class Api::V1::MediaController < ApplicationController
 
   def index
     if params[:q].present?
-      results = MediaFacade.search(params[:q])
+      results = MediaFacade.search(params[:q], params[:user_id])
     else
       results = []
     end

@@ -12,10 +12,10 @@ class MediaFacade
     end
   end
 
-  def self.search(query)
+  def self.search(query, user_id = nil)
     search_results = MediaService.search(query)
     search_results[:results].map do |media_data|
-      Media.new(media_data)
+      Media.new(media_data, user_id)
     end
   end
 end
