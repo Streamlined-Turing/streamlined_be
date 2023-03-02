@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Edit Media List API' do
-  describe 'patch user_media/id' do
+  describe 'patch user/user_id/media/id?' do
     it 'changes or creates a media_list entry to link a usermedia to a list' do
       user = create(:user) 
       list = user.lists.last
