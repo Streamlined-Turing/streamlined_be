@@ -8,7 +8,7 @@ class MediaFacade
     user = User.find(user_id)
     list_media_ids = user.media_ids_for(list_name)
     list_media_ids.map do |media_id|
-      details(media_id)
+      details(media_id, user_id)
     end
   end
 

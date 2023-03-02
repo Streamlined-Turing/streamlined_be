@@ -55,7 +55,10 @@ RSpec.describe 'User Lists API' do
                                         :imdb_id,
                                         :tmdb_id,
                                         :tmdb_type,
-                                        :trailer
+                                        :trailer, 
+                                        :user_lists,
+                                        :added_to_list_on,
+                                        :user_rating
                                       )
         expect(attributes[:id]).to be_a(Integer)
         expect(attributes[:title]).to be_a(String)
@@ -73,6 +76,9 @@ RSpec.describe 'User Lists API' do
         expect(attributes[:tmdb_id]).to be_a(Integer)
         expect(attributes[:tmdb_type]).to be_a(String)
         expect(attributes[:trailer]).to be_a(String)
+        expect(attributes[:user_lists]).to be_a(String)
+        expect(attributes[:added_to_list_on]).to be_a(String)
+        expect(attributes[:user_rating]).to be_a(Integer)
       end
     end
 
