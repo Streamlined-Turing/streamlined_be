@@ -137,6 +137,26 @@ RSpec.describe 'Users API', :vcr do
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
     end
+
+    it 'returns a valid error if both are criteria fail' do
+      user = User.create!(sub: '104505147435508023263',
+                          email: 'johnny@example.com',
+                          name: 'Johnny Appleseed',
+                          picture: 'https://lh3.googleusercontent.com/a/AEdFTp5vj_rzxJzWHjgqM1-InqDI0fJWxwpHK_zElpKLgA=s96-c')
+
+      expect(user.username).to be nil
+
+      update_params = { 'username' => 'a[]' }
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+
+      patch "/api/v1/users/#{user.id}", headers: headers, params: JSON.generate(update_params)
+
+      error = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+      expect(error[:message]).to eq('Invalid characters. Only - and _ allowed for special characters, Username must be 6 - 36 characters in length')
+    end
   end
 
   describe 'show a user resource' do
