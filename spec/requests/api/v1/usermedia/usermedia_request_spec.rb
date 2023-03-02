@@ -127,6 +127,7 @@ RSpec.describe 'Edit Media List API' do
 
       expect(user.user_medias).to eq []
     end
+  end
 
   describe 'delete user_media/id' do
     it 'deletes user_media for a user' do
@@ -205,3 +206,4 @@ RSpec.describe 'Edit Media List API' do
     end
   end
 end
+
