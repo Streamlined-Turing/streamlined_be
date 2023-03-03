@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "3652994d-582b-41ed-87f0-4f6a985cba30",
+		"name": "Streamlined Backend API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25557680"
+	},
+	"item": [
+		{
+			"name": "User's Lists Currently Watching",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/1/lists?list=currently+WaTCHING",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "list",
+							"value": "currently+WaTCHING"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User's Lists Want To Watch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/1/lists?list=currently+WaTCHING",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "list",
+							"value": "currently+WaTCHING"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User's Lists No list exists error",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Add or Move media to user list",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/1/media/3173903?list=Watched",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1",
+						"media",
+						"3173903"
+					],
+					"query": [
+						{
+							"key": "list",
+							"value": "Watched"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Destroy User Media from list Sad Path (Media not found)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/1/media/1234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1",
+						"media",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Destroy User Media from list Sad Path (User Not Found)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/2/media/1234",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"2",
+						"media",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Media Rating",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Media Details Show",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Media Results Search (User Logged In)",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "User Basic",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Trending Media",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
