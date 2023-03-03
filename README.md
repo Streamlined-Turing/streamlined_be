@@ -24,6 +24,24 @@ This project requires Ruby 2.7.4
 
 You should now be able to hit the API endpoints using Postman or a similar tool.
 
+## Running the test suite
+The backend portion of the app makes calls to the Watchmode and TheMovieDataBase API which are VCR stubbed but you need to register and aquire your own API keys to produce any endpoints.
+
+### Figaro Gem
+Our team used the gem Figaro to create a hidden .yml file to save our env files (You can use any gem you know can accomplish this).
+The gem is already listed in Gemfile but you need to follow the steps at https://github.com/laserlemon/figaro#:~:text=Figaro%20installation%20is%20easy%3A   
+Start at `bundle exec figaro install`   
+The variable names of your api keys must follow this pattern.    
+```
+config/application.yml
+
+watch_mode_api_key: YOUR WATCHMODE API KEY
+moviedb_api_key: YOUR TMDB API KEY
+```   
+
+The steps to aquire these keys can be found on their respective websites.   
+WatchModeAPI:  https://api.watchmode.com/?message=MXxZb3UgSGF2ZSBCZWVuIExvZ2dlZCBPdXQu   
+TMDBAPI: https://developers.themoviedb.org/3/getting-started/introduction   
 ## Built With
 ```
 Ruby on Rails
