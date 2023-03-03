@@ -36,14 +36,7 @@ RSpec
 ![Screen Shot 2023-02-23 at 5 08 47 PM](https://user-images.githubusercontent.com/111480866/221070631-305e77dc-7456-4cd0-8aab-464f9125d4b1.png)
 
 ## API Endpoints
-### Movie Details
-```
-
-```
-### Streaming
-```
-
-```
+[Endpoints Documentation](./docs/api_endpoints.md)
 
 ## Contributors 
 
