@@ -5,6 +5,8 @@ class Api::V1::UsersController < ApplicationController
     else
       user = User.create(user_params)
       render json: UserSerializer.new(user), status: :created
+      WelcomeSenderJob.perform_async(user.email, user.name)
+      # TODO: figure out how to use sidekiq/redis to do the thang async
     end
   end
 
