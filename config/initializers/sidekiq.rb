@@ -1,7 +1,7 @@
 Sidekiq.configure_server do |config|
-  config.redis = { url: ENV['redis_url'] }
+  config.redis = { url: ENV['REDIS_ENDPOINT_URI'] }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: ENV['redis_url'] }
+  config.redis = { url: ENV['REDIS_ENDPOINT_URI'] }
 end
